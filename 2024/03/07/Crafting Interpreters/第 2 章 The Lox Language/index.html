@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZTFan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简单介绍了Lox语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第 2 章 The Lox Language">
+<meta property="og:url" content="http://example.com/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%202%20%E7%AB%A0%20The%20Lox%20Language/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单介绍了Lox语言">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-07T02:00:29.139Z">
+<meta property="article:modified_time" content="2024-03-05T09:32:35.707Z">
+<meta property="article:author" content="ZTFan">
+<meta property="article:tag" content="Interpreter">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>第 2 章 The Lox Language - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小范同学要努力鸭！</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第 2 章 The Lox Language"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        ZTFan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-07 10:00" pubdate>
+          2024年3月7日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="项目"
+        id="heading-31ecc0e65b4cd3e6b12577382bb56d6a" role="tab" data-toggle="collapse" href="#collapse-31ecc0e65b4cd3e6b12577382bb56d6a"
+        aria-expanded="true"
+      >
+        项目
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-31ecc0e65b4cd3e6b12577382bb56d6a"
+           role="tabpanel" aria-labelledby="heading-31ecc0e65b4cd3e6b12577382bb56d6a">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Crafting Interpreters"
+        id="heading-77153850c7708a09b7cabfdf88a987b3" role="tab" data-toggle="collapse" href="#collapse-77153850c7708a09b7cabfdf88a987b3"
+        aria-expanded="true"
+      >
+        Crafting Interpreters
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-77153850c7708a09b7cabfdf88a987b3"
+           role="tabpanel" aria-labelledby="heading-77153850c7708a09b7cabfdf88a987b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%201%20%E7%AB%A0%20A%20Map%20of%20the%20Terriory/" title="第 1 章 A Map of the Territory"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 1 章 A Map of the Territory</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%202%20%E7%AB%A0%20The%20Lox%20Language/" title="第 2 章 The Lox Language"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">第 2 章 The Lox Language</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%203%20%E7%AB%A0%20Scanning/" title="第 3 章 Scanning"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 3 章 Scanning</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">第 2 章 The Lox Language</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第-2-章-The-Lox-Language"><a href="#第-2-章-The-Lox-Language" class="headerlink" title="第 2 章 The Lox Language"></a>第 2 章 The Lox Language</h1><h2 id="2-1-Hello-Lox"><a href="#2-1-Hello-Lox" class="headerlink" title="2.1 Hello, Lox"></a>2.1 Hello, Lox</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">print <span class="hljs-string">&quot;Hello, world!&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>lox 语言是 C 语言的家族成员之一</p>
+<h2 id="2-2-A-High-Level-Language"><a href="#2-2-A-High-Level-Language" class="headerlink" title="2.2 A High-Level Language"></a>2.2 A High-Level Language</h2><p>与 Lox 有共同之处的三个语言:</p>
+<ul>
+<li>JavaScript: Lox 语法与 JavaScript 相似, 因为大多数 C 语法语言都是这样的.</li>
+<li>Scheme: Lox 的范围界定方法上与 Scheme 相关.</li>
+<li>Lua: 构建 C 风格的 Lox 很大程度上借鉴了 Lua 的干净, 高效的实现.</li>
+</ul>
+<p>明显的共同之处有以下两点:</p>
+<h3 id="2-2-1-Dynamic-typing-动态类型"><a href="#2-2-1-Dynamic-typing-动态类型" class="headerlink" title="2.2.1 Dynamic typing (动态类型)"></a>2.2.1 Dynamic typing (动态类型)</h3><p>Lox 是动态类型的, 即变量可以存储任何类型的值, 单个变量在不同时间可以有不同的类型. 静态类型系统需要学习和实现大量工作, 跳过它会使语言更加简单实现. 动态类型将类型检查推迟到运行时, 这样可以更快启动解释器并执行代码.</p>
+<h3 id="2-2-2-Automatic-memory-management-自动内存管理"><a href="#2-2-2-Automatic-memory-management-自动内存管理" class="headerlink" title="2.2.2 Automatic memory management (自动内存管理)"></a>2.2.2 Automatic memory management (自动内存管理)</h3><p>有两种主要的内存管理技术:</p>
+<ul>
+<li><strong>reference counting (引用计数)</strong></li>
+<li><strong>tracing garbage collection (跟踪垃圾收集器)</strong></li>
+</ul>
+<p>现在主要使用 <strong>GC</strong>, 同时我们也需要写出自己的垃圾收集器.</p>
+<h2 id="2-3-Date-Tyeps-数据类型"><a href="#2-3-Date-Tyeps-数据类型" class="headerlink" title="2.3 Date Tyeps (数据类型)"></a>2.3 Date Tyeps (数据类型)</h2><ul>
+<li><code>Booleans</code>: 布尔类型</li>
+<li><code>Numbers</code>: 双精度浮点数</li>
+<li><code>Strings</code>: 字符串</li>
+<li><code>Nil</code>: 相当于<code>null</code></li>
+</ul>
+<h2 id="2-4-Expressions-表达式"><a href="#2-4-Expressions-表达式" class="headerlink" title="2.4 Expressions (表达式)"></a>2.4 Expressions (表达式)</h2><ul>
+<li>Arithmetic (算术运算): +, - , *, &#x2F;</li>
+<li>Comparison and equality (比较与相等): &lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;, &#x3D;&#x3D;</li>
+<li>Logical operatiors (逻辑运算): and, or, !</li>
+<li>Precedence and grouping (优先级与分组): 优先级形式与 C 语言相同, 同时通过 () 进行分组</li>
+</ul>
+<h2 id="2-5-Statement-语句"><a href="#2-5-Statement-语句" class="headerlink" title="2.5 Statement (语句)"></a>2.5 Statement (语句)</h2><p>表达式主要作用是产生一个值, 而语句的作用是产生一个效果 (修改某些状态, 输入, 输出).</p>
+<p>表达式后面跟分号 <code>;</code> 可以将表达式提升为语句, 称为 <code>expression statement</code>. 同时, 可以将一系列语句通过 <code>&#123;&#125;</code> 打包在一个块中, 并且块也会影响作用域.</p>
+<h2 id="3-6-Variables-变量"><a href="#3-6-Variables-变量" class="headerlink" title="3.6 Variables (变量)"></a>3.6 Variables (变量)</h2><p>可以通过 <code>var</code> 来声明一个变量, 若未进行初始化, 那么变量的值是 <code>nil</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">var breakfast = <span class="hljs-string">&quot;bagels&quot;</span>;<br>print breakfast; <span class="hljs-comment">// &quot;bagels&quot;.</span><br>breakfast = <span class="hljs-string">&quot;beignets&quot;</span>;<br>print breakfast; <span class="hljs-comment">// &quot;beignets&quot;.</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="3-7-Control-Flow-控制流"><a href="#3-7-Control-Flow-控制流" class="headerlink" title="3.7 Control Flow (控制流)"></a>3.7 Control Flow (控制流)</h2><ul>
+<li><code>if</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (condition) &#123;<br>  print <span class="hljs-string">&quot;yes&quot;</span>;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  print <span class="hljs-string">&quot;no&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>while</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">var a = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (a &lt; <span class="hljs-number">10</span>) &#123;<br>  print a;<br>  a = a + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>for</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">for</span> (var a = <span class="hljs-number">1</span>; a &lt; <span class="hljs-number">10</span>; a = a + <span class="hljs-number">1</span>) &#123;<br>  print a;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-8-Functions-函数"><a href="#3-8-Functions-函数" class="headerlink" title="3.8 Functions (函数)"></a>3.8 Functions (函数)</h2><p>可以通过 <code>fun</code> 来声明一个函数, 并通过 <code>return</code> 返回一个值. 若无 <code>return</code> 则返回 <code>nil</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C">fun <span class="hljs-title function_">returnSum</span><span class="hljs-params">(a, b)</span> &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>函数调用与 C 语言中形式一样</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">makeBreakfast(bacon, eggs, toast);<br></code></pre></td></tr></table></figure>
+
+<p>注意区分 <strong>argument, parameter</strong>:</p>
+<ul>
+<li>argument: <strong>实际参数</strong></li>
+<li>parameter: <strong>形式参数</strong></li>
+</ul>
+<h2 id="3-9-Closures-闭包"><a href="#3-9-Closures-闭包" class="headerlink" title="3.9 Closures (闭包)"></a>3.9 Closures (闭包)</h2><p>在 Lox 中, 函数是真实的值, 可以对这些值进行引用, 存储在变量中, 传递等.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">addPair</span><span class="hljs-params">(a, b)</span> &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br>fun <span class="hljs-title function_">identity</span><span class="hljs-params">(a)</span> &#123;<br>  <span class="hljs-keyword">return</span> a;<br>&#125;<br><br>print <span class="hljs-title function_">identity</span><span class="hljs-params">(addPair)</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span>; <span class="hljs-comment">// Prints &quot;3&quot;.</span><br></code></pre></td></tr></table></figure>
+
+<p>由于函数是声明语句, 可以在另一个函数中声明局部函数.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">outerFunction</span><span class="hljs-params">()</span> &#123;<br>  fun <span class="hljs-title function_">localFunction</span><span class="hljs-params">()</span> &#123;<br>    print <span class="hljs-string">&quot;I&#x27;m local!&quot;</span>;<br>  &#125;<br><br>  localFunction();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>若将局部函数, 头等函数, 块作用域组合在一起:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">returnFunction</span><span class="hljs-params">()</span> &#123;<br>  var outside = <span class="hljs-string">&quot;outside&quot;</span>;<br><br>  fun <span class="hljs-title function_">inner</span><span class="hljs-params">()</span> &#123;<br>    print outside;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> inner;<br>&#125;<br><br>var fn = returnFunction();<br>fn();<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中, <code>inner()</code> 访问了在其函数体外的外部函数中声明的局部变量. 为做到这一点, <code>inner()</code> 必须保留对它使用的任何周围变量的引用, 即使在外层函数返回之后, 这些变量仍然存在. 我们把能做到这一点的函数称为 <strong>closures (闭包)</strong>.</p>
+<h2 id="3-10-Classes-类"><a href="#3-10-Classes-类" class="headerlink" title="3.10 Classes (类)"></a>3.10 Classes (类)</h2><h3 id="3-10-1-class-and-prototypes"><a href="#3-10-1-class-and-prototypes" class="headerlink" title="3.10.1 class and prototypes"></a>3.10.1 class and prototypes</h3><p>当涉及对象时, 有两种方法: <strong>class (类), prototypes(原型)</strong></p>
+<ul>
+<li>class: 有两个核心概念:实例和类<ul>
+<li>实例存储每个对象的状态, 并且有一个对实例的类的引用.</li>
+<li>类包含方法和继承链.</li>
+<li>要在实例上调用类, 会有一个中间层, 先查找到实例的类, 任何在其中找到方法.</li>
+</ul>
+</li>
+<li>prototypes: <strong>只有对象, 没有类</strong><ul>
+<li>每个对象都有自己的方法和状态.</li>
+<li>对象之间可以继承.</li>
+</ul>
+</li>
+</ul>
+<p>原型在语言中更简单, 但是, 它们似乎只是通过将复杂性推给用户来实现的. 对于 Lox 来说, 将省去用户的麻烦, 直接把类包含进去.</p>
+<h3 id="3-10-2-Lox-中的类"><a href="#3-10-2-Lox-中的类" class="headerlink" title="3.10.2 Lox 中的类"></a>3.10.2 Lox 中的类</h3><p>声明一个类及其方法:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  cook() &#123;<br>    print <span class="hljs-string">&quot;Eggs a-fryin&#x27;!&quot;</span>;<br>  &#125;<br><br>  serve(who) &#123;<br>    print <span class="hljs-string">&quot;Enjoy your breakfast, &quot;</span> + who + <span class="hljs-string">&quot;.&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>类声明生效时, Lox 将创建一个对象, 并将其存储在以该类命名的变量中.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// Store it in variables.</span><br>var someVariable = Breakfast;<br><br><span class="hljs-comment">// Pass it to functions.</span><br>someFunction(Breakfast);<br></code></pre></td></tr></table></figure>
+
+<p>创建类的实例, 可以使用类似于调用函数的方法:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">var breakfast = Breakfast();<br>print breakfast; <span class="hljs-comment">// &quot;Breakfast instance&quot;.</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-10-3-Instantiation-and-initialization-实例和初始化"><a href="#3-10-3-Instantiation-and-initialization-实例和初始化" class="headerlink" title="3.10.3 Instantiation and initialization (实例和初始化)"></a>3.10.3 Instantiation and initialization (实例和初始化)</h3><p>类中不仅有方法, 还有状态. Lox 允许自由地向对象中添加状态. 若起初没有该字段, 那么对它进行赋值时会先创建.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">breakfast.meat = <span class="hljs-string">&quot;sausage&quot;</span>;<br>breakfast.bread = <span class="hljs-string">&quot;sourdough&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>若想从方法内部访问当前对象上的字段或方法, 可以使用 <code>this</code>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  serve(who) &#123;<br>    print <span class="hljs-string">&quot;Enjoy your &quot;</span> + this.meat + <span class="hljs-string">&quot; and &quot;</span> +<br>        this.bread + <span class="hljs-string">&quot;, &quot;</span> + who + <span class="hljs-string">&quot;.&quot;</span>;<br>  &#125;<br><br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在对象中封装数据的目的之一是确保对象在创建时处于有效状态, 可以定义一个初始化器 <code>init()</code>, 在构造对象时会自动调用该方法.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  init(meat, bread) &#123;<br>    this.meat = meat;<br>    this.bread = bread;<br>  &#125;<br><br>  <span class="hljs-comment">// ...</span><br>&#125;<br><br>var baconAndToast = Breakfast(<span class="hljs-string">&quot;bacon&quot;</span>, <span class="hljs-string">&quot;toast&quot;</span>);<br>baconAndToast.serve(<span class="hljs-string">&quot;Dear Reader&quot;</span>);<br><span class="hljs-comment">// &quot;Enjoy your bacon and toast, Dear Reader.&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-10-4-Inheritance-继承"><a href="#3-10-4-Inheritance-继承" class="headerlink" title="3.10.4 Inheritance (继承)"></a>3.10.4 Inheritance (继承)</h3><p>使用 <code>&lt;</code> 来实现继承:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Brunch</span> &lt;</span> Breakfast &#123;<br>  drink() &#123;<br>    print <span class="hljs-string">&quot;How about a Bloody Mary?&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Brunch 是 <strong>derived class (派生类) or subclass 子类)</strong>, Breakfast 是 <strong>base class (基类) or superclass (超类)</strong>.</p>
+<p>父类中定义的方法都会被子类继承, <code>init()</code> 同样会被继承. 但是为了确保父类维护其状态, 又不通过调用原始的初始化方法, 可以使用 <code>super</code>.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Brunch</span> &lt;</span> Breakfast &#123;<br>  init(meat, bread, drink) &#123;<br>    super.init(meat, bread);<br>    this.drink = drink;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-11-The-Standary-Library-标准库"><a href="#3-11-The-Standary-Library-标准库" class="headerlink" title="3.11 The Standary Library (标准库)"></a>3.11 The Standary Library (标准库)</h2><p>一组直接在解释器中实现的功能集, 所有用户定义的行为都是建立在此基础上.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/Crafting-Interpreters/" class="category-chain-item">Crafting Interpreters</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Interpreter/" class="print-no-link">#Interpreter</a>
+      
+        <a href="/tags/C/" class="print-no-link">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%203%20%E7%AB%A0%20Scanning/" title="第 3 章 Scanning">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第 3 章 Scanning</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%201%20%E7%AB%A0%20A%20Map%20of%20the%20Terriory/" title="第 1 章 A Map of the Territory">
+                        <span class="hidden-mobile">第 1 章 A Map of the Territory</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

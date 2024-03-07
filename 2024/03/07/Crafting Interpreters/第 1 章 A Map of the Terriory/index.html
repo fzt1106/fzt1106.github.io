@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ZTFan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="介绍了语言实现的总体结构, 实现它们的捷径, 以及编译器和解释器的区别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第 1 章 A Map of the Territory">
+<meta property="og:url" content="http://example.com/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%201%20%E7%AB%A0%20A%20Map%20of%20the%20Terriory/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍了语言实现的总体结构, 实现它们的捷径, 以及编译器和解释器的区别">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105116906.png">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105133238.png">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228102912591.png">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303144709671.png">
+<meta property="article:published_time" content="2024-03-07T02:00:29.138Z">
+<meta property="article:modified_time" content="2024-03-05T09:32:31.202Z">
+<meta property="article:author" content="ZTFan">
+<meta property="article:tag" content="Interpreter">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png">
+  
+  
+  
+  <title>第 1 章 A Map of the Territory - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小范同学要努力鸭！</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第 1 章 A Map of the Territory"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        ZTFan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-07 10:00" pubdate>
+          2024年3月7日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="项目"
+        id="heading-31ecc0e65b4cd3e6b12577382bb56d6a" role="tab" data-toggle="collapse" href="#collapse-31ecc0e65b4cd3e6b12577382bb56d6a"
+        aria-expanded="true"
+      >
+        项目
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-31ecc0e65b4cd3e6b12577382bb56d6a"
+           role="tabpanel" aria-labelledby="heading-31ecc0e65b4cd3e6b12577382bb56d6a">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Crafting Interpreters"
+        id="heading-77153850c7708a09b7cabfdf88a987b3" role="tab" data-toggle="collapse" href="#collapse-77153850c7708a09b7cabfdf88a987b3"
+        aria-expanded="true"
+      >
+        Crafting Interpreters
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-77153850c7708a09b7cabfdf88a987b3"
+           role="tabpanel" aria-labelledby="heading-77153850c7708a09b7cabfdf88a987b3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%201%20%E7%AB%A0%20A%20Map%20of%20the%20Terriory/" title="第 1 章 A Map of the Territory"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">第 1 章 A Map of the Territory</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%202%20%E7%AB%A0%20The%20Lox%20Language/" title="第 2 章 The Lox Language"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 2 章 The Lox Language</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%203%20%E7%AB%A0%20Scanning/" title="第 3 章 Scanning"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">第 3 章 Scanning</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">第 1 章 A Map of the Territory</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第-1-章-A-Map-of-the-Territory"><a href="#第-1-章-A-Map-of-the-Territory" class="headerlink" title="第 1 章 A Map of the Territory"></a>第 1 章 A Map of the Territory</h1><h2 id="1-1-语言各部分"><a href="#1-1-语言各部分" class="headerlink" title="1.1 语言各部分"></a>1.1 语言各部分</h2><div style="text-align center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png" srcset="/img/loading.gif" lazyload alt="image-20240303114655871" style="zoom: 80%;" /></div>
+
+<h3 id="1-1-1-Scanning-扫描-词法分析"><a href="#1-1-1-Scanning-扫描-词法分析" class="headerlink" title="1.1.1 Scanning (扫描|词法分析)"></a>1.1.1 Scanning (扫描|词法分析)</h3><p><code>Scanning (扫描) </code>等同于 <code>lexing (词法分析)</code>, <code>Scanner (or lexer)</code> 的作用是: 接受线性字符流，并将它们切分成类似于“单词”的多个小单元，这些单元称为 <code>token (词法单元) </code>.</p>
+<p>词法单元可以是一个字符 <code>(</code>, 也可以是数字 <code>123</code>, 字符串 <code>hi</code>, 标识符 <code>cin</code></p>
+<p>源文件中一些字符是没有意义的, 比如空格和注释. Scanner会忽略这些, 最终得到一个简单的字符单元序列.</p>
+<p><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105116906.png" srcset="/img/loading.gif" lazyload alt="image-20240228105116906"></p>
+<p><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105133238.png" srcset="/img/loading.gif" lazyload alt="image-20240228105133238"></p>
+<h3 id="1-1-2-Parsing-解析-语法分析"><a href="#1-1-2-Parsing-解析-语法分析" class="headerlink" title="1.1.2 Parsing (解析|语法分析)"></a>1.1.2 Parsing (解析|语法分析)</h3><p><code>Parsing (解析) </code>即<code>语法分析</code>, <code>parser (解析器) </code>作用是：将<strong>词法单元序列转化为树形结构</strong>。因为树形结构能很好的反映语法的嵌套结构. 这些树称为 <code>parse tree, abstract syntax tree</code>. 同时，解析器的作用还包括检测 <code>syntax errors (语法错误)</code>.</p>
+<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228102912591.png" srcset="/img/loading.gif" lazyload alt="image-20240228102912591" /></div>
+
+<h3 id="1-1-3-Static-analysis-静态分析"><a href="#1-1-3-Static-analysis-静态分析" class="headerlink" title="1.1.3 Static analysis (静态分析)"></a>1.1.3 Static analysis (静态分析)</h3><p>静态分析的任务是: <code>bingding (绑定) or resolution (决议) </code>, 即对于每一个标识符，找出定义该名字的地方，并将二者联系起来。</p>
+<p>要实现绑定，所有语义的信息都需要存储在某个地方，有以下地方可供选择：</p>
+<ul>
+<li>存储在语法树本身的<strong>属性</strong>字段中.（属性是节点的额外字段）</li>
+<li>存储在外部查找表中, 称其为<strong>符号表</strong>.</li>
+<li>将树转换为一个全新的数据结构, 更直接的表达代码的语义.</li>
+</ul>
+<h3 id="1-1-4-Intermediate-representations-中间码"><a href="#1-1-4-Intermediate-representations-中间码" class="headerlink" title="1.1.4 Intermediate representations (中间码)"></a>1.1.4 Intermediate representations (中间码)</h3><p>前面的内容属于 <code>front end (前端)</code>, 后续则是 <code>back end (后端)</code>, 在二者中间还有<code>middle end (中端)</code>.</p>
+<p>前端关注源语言编写的程序, 后端则关注程序运行的整个架构. 而中端阶段, 代码被存储在 <code>Intermediate representations (中间代码)</code> 中, 这些中间代码与源文件或目的文件没有紧密的联系, 而是充当它们之间的<strong>接口</strong>.</p>
+<h3 id="1-1-5-Optimization-优化"><a href="#1-1-5-Optimization-优化" class="headerlink" title="1.1.5 Optimization (优化)"></a>1.1.5 Optimization (优化)</h3><p><code>Optimization (优化)</code>的任务是: 在理解用户的程序后，用另一个具有相同语义但是实现效率更高的程序来代替它.</p>
+<p>比如, <code>constant floding (常量折叠)</code>: 可以在编译过程中计算出哪些简单的表达式, 并将计算结果直接替换表达式.</p>
+<h3 id="1-1-6-Code-generation-代码生成"><a href="#1-1-6-Code-generation-代码生成" class="headerlink" title="1.1.6 Code generation (代码生成)"></a>1.1.6 Code generation (代码生成)</h3><p>在优化用户程序之后, 需要将其转化为机器可以实际运行的代码, 即<code>Code generation (代码生成)</code>, 生成的代码通常是CPU运行的类似于汇编的原始指令.</p>
+<p>但是, 不应该为芯片生成机器指令, 因为缺乏可移植性. 实际上, 编译器是为一个假设的, 理想化的机器编写代码, 成为<code>bytecode (字节码)</code>.</p>
+<h3 id="1-1-7-Virtual-machine-虚拟机"><a href="#1-1-7-Virtual-machine-虚拟机" class="headerlink" title="1.1.7 Virtual machine (虚拟机)"></a>1.1.7 Virtual machine (虚拟机)</h3><p>编译器产生字节码之后, 芯片仍然不能解析这些字节码, 还需进行翻译工作, 有以下两种方法:</p>
+<ul>
+<li>为每个目标体系结构编写一个小型编译器, 将字节码转化为该机器的本机代码. 虽然仍然需要为每个芯片做翻译工作, 但是工作任务简单.</li>
+<li><em>可以编写<code>VM (虚拟机)</code>, 该程序可在运行时模拟支持虚拟架构的虚拟芯片. 运行字节码比翻译成本机代码运行要慢, 但好处是简单并且具有可移植性.</em></li>
+</ul>
+<h3 id="1-1-8-Runtime-运行时"><a href="#1-1-8-Runtime-运行时" class="headerlink" title="1.1.8 Runtime (运行时)"></a>1.1.8 Runtime (运行时)</h3><p>有时需要我们的语言在程序运行时提供一些特殊的服务, 比如自动内存管理: 需要一个垃圾收集器去回收未使用的bit. 这些东西是在<code>Runtime (运行时)</code>进行的，这些实现运行时的代码会直接插入到生成的可执行文件中.</p>
+<h2 id="1-2-捷径和备选路线"><a href="#1-2-捷径和备选路线" class="headerlink" title="1.2 捷径和备选路线"></a>1.2 捷径和备选路线</h2><h3 id="1-2-1-Single-pass-compilers-单遍编译器"><a href="#1-2-1-Single-pass-compilers-单遍编译器" class="headerlink" title="1.2.1 Single-pass compilers (单遍编译器)"></a>1.2.1 Single-pass compilers (单遍编译器)</h3><p>Single-pass compilers 将 parsing, analysis, and code generation 交织在一起, 使它们可以直接在 parser 中生成输出代码, 不需要其他 syntax trees.</p>
+<p><em>但是这类 Single-pass compilers 限制了语言的设计: 没有中间数据结构来存储程序, 不会重新访问任何之前解析过的代码的部分.</em></p>
+<h3 id="1-2-2-Tree-walk-interpreters-树遍历解释器"><a href="#1-2-2-Tree-walk-interpreters-树遍历解释器" class="headerlink" title="1.2.2 Tree-walk interpreters (树遍历解释器)"></a>1.2.2 Tree-walk interpreters (树遍历解释器)</h3><p><em>Tree-walk interpreters 将代码解析为 AST, 运行程序时, 解释器每次都会遍历语法树的一个分支和叶子, 并在计算每个节点.</em></p>
+<h3 id="1-2-3-Transpiler-转译器"><a href="#1-2-3-Transpiler-转译器" class="headerlink" title="1.2.3 Transpiler (转译器)"></a>1.2.3 Transpiler (转译器)</h3><div class="note note-info">
+            <p>不理解, 待补</p>
+          </div>
+
+<h3 id="1-2-4-Just-in-time-compilation-即时编译"><a href="#1-2-4-Just-in-time-compilation-即时编译" class="headerlink" title="1.2.4 Just-in-time compilation (即时编译)"></a>1.2.4 Just-in-time compilation (即时编译)</h3><div class="note note-info">
+            <p>不理解, 待补</p>
+          </div>
+
+<h2 id="1-3-Compilers-and-Interpreters-编译器和解释器"><a href="#1-3-Compilers-and-Interpreters-编译器和解释器" class="headerlink" title="1.3 Compilers and Interpreters (编译器和解释器)"></a>1.3 Compilers and Interpreters (编译器和解释器)</h2><ul>
+<li>Compilers: 将源语言翻译成其他语言, 但不会执行, 用户必须自己运行. 典型代表是 GCC, Clang, 它们是 C 编译器.<ul>
+<li>较低级形式的语言: 字节码, 机器码</li>
+<li>另一种高级语言</li>
+</ul>
+</li>
+<li>Interpreters: 接受源代码并立即执行. 如 Ruby.</li>
+</ul>
+<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303144709671.png" srcset="/img/loading.gif" lazyload alt="image-20240303144709671" style="zoom:50%;" /></div>
+
+<p>对于 CPython, 其看起来是 Interpreters, 但是其内部实现还有有一些 Compile 的工作. 大多洒脚本语言都是这种工作方式.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/Crafting-Interpreters/" class="category-chain-item">Crafting Interpreters</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Interpreter/" class="print-no-link">#Interpreter</a>
+      
+        <a href="/tags/C/" class="print-no-link">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/07/Crafting%20Interpreters/%E7%AC%AC%202%20%E7%AB%A0%20The%20Lox%20Language/" title="第 2 章 The Lox Language">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第 2 章 The Lox Language</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/07/Codeforces/2024.3.6-Codeforces%20Round%20930%20(Div.%202)/" title="Codeforces Round 930 (Div. 2)">
+                        <span class="hidden-mobile">Codeforces Round 930 (Div. 2)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
