@@ -240,7 +240,7 @@
         
         
         
-          36 分钟
+          35 分钟
         
       </span>
     
@@ -374,16 +374,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-4-章-表达式"><a href="#第-4-章-表达式" class="headerlink" title="第 4 章 表达式"></a>第 4 章 表达式</h1><p>表达式由一个或多个 <strong>运算对象</strong> 组成, 对表达式求值将得到一个 <strong>结果</strong>. <strong>字面值和变量是最简单的表达式</strong>, 其结果就是它们本身. <strong>运算符</strong> 和一个或多个运算对象组合起来可以生成较为复杂的表达式.</p>
-<h2 id="4-1-基础"><a href="#4-1-基础" class="headerlink" title="4.1 基础"></a>4.1 基础</h2><h3 id="4-1-1-基本概念"><a href="#4-1-1-基本概念" class="headerlink" title="4.1.1 基本概念"></a>4.1.1 基本概念</h3><p>C++ 根据运算符作用的运算对象个数不同定义了 <strong>一元运算符, 二元运算符, 三元运算符</strong>. 一些符号既能作为一元运算符又能作为二元运算符, 其含义由上下文决定.</p>
+                <h1>第 4 章 表达式</h1>
+<p>表达式由一个或多个 <strong>运算对象</strong> 组成, 对表达式求值将得到一个 <strong>结果</strong>. <strong>字面值和变量是最简单的表达式</strong>, 其结果就是它们本身. <strong>运算符</strong> 和一个或多个运算对象组合起来可以生成较为复杂的表达式.</p>
+<h2 id="4-1-基础">4.1 基础</h2>
+<h3 id="4-1-1-基本概念">4.1.1 基本概念</h3>
+<p>C++ 根据运算符作用的运算对象个数不同定义了 <strong>一元运算符, 二元运算符, 三元运算符</strong>. 一些符号既能作为一元运算符又能作为二元运算符, 其含义由上下文决定.</p>
 <blockquote>
 <p><strong>函数调用</strong> 是一种特殊的运算符, 它对运算对象的数量没有限制.</p>
 </blockquote>
-<h4 id="组合运算符和运算对象"><a href="#组合运算符和运算对象" class="headerlink" title="组合运算符和运算对象"></a>组合运算符和运算对象</h4><p>表达式的含义与 <strong>运算符的优先级, 结合率, 运算对象的求值顺序</strong> 有关.</p>
-<h4 id="运算对象转换"><a href="#运算对象转换" class="headerlink" title="运算对象转换"></a>运算对象转换</h4><p>表达式求值过程中, 运算对象类型可以转换成另一种类型. 小整数类型 (如 bool, char, short 等) 通常会 <strong>提升</strong> 为较大整数类型, 主要是 int.</p>
-<h4 id="重载运算符"><a href="#重载运算符" class="headerlink" title="重载运算符"></a>重载运算符</h4><p>重载运算符: 为已存在的运算符赋予另一层含义.</p>
+<h4 id="组合运算符和运算对象">组合运算符和运算对象</h4>
+<p>表达式的含义与 <strong>运算符的优先级, 结合率, 运算对象的求值顺序</strong> 有关.</p>
+<h4 id="运算对象转换">运算对象转换</h4>
+<p>表达式求值过程中, 运算对象类型可以转换成另一种类型. 小整数类型 (如 bool, char, short 等) 通常会 <strong>提升</strong> 为较大整数类型, 主要是 int.</p>
+<h4 id="重载运算符">重载运算符</h4>
+<p>重载运算符: 为已存在的运算符赋予另一层含义.</p>
 <p>重载运算符需要定义运算对象和返回值的类型, 但是 <strong>运算对象的个数, 运算符的优先级和结合律都无法改变</strong>.</p>
-<h4 id="左值和右值"><a href="#左值和右值" class="headerlink" title="左值和右值"></a>左值和右值</h4><p>C++ 中表达式非 <strong>左值</strong> 即 <strong>右值</strong>. 当一个运算对象被用作右值的时候, 用的是对象的 <strong>值 (内容)</strong>; 当对象被用作左值时, 用的是对象的 <strong>身份 (在内存中的位置)</strong>.</p>
+<h4 id="左值和右值">左值和右值</h4>
+<p>C++ 中表达式非 <strong>左值</strong> 即 <strong>右值</strong>. 当一个运算对象被用作右值的时候, 用的是对象的 <strong>值 (内容)</strong>; 当对象被用作左值时, 用的是对象的 <strong>身份 (在内存中的位置)</strong>.</p>
 <p>一个重要原则: <u> 需要用右值的地方可以被左值替换 (使用左值的内容), 但不能将右值替换左值使用 </u>.</p>
 <blockquote>
 <p>若表达式的求值结果是左值, <code>decltype</code> 作用于该表达式 (不是变量) 将得到一个 <strong>引用类型</strong>.</p>
@@ -393,17 +400,18 @@
 <li><code>&amp;p</code> 产生右值, 所以 <code>decltype(&amp;p)</code> 的结果是 <code>int**</code>.</li>
 </ul>
 </blockquote>
-<h3 id="4-1-2-优先级与结合律"><a href="#4-1-2-优先级与结合律" class="headerlink" title="4.1.2 优先级与结合律"></a>4.1.2 优先级与结合律</h3><p><strong>复合表达式</strong>: 含有两个或多个运算符的表达式. 运算符的优先级和结合律决定了运算对象的组合方式. 括号无视普通的组合规则, 表达式中括号括起来的部分被当成一个单元来求值.</p>
-<h3 id="4-1-3-求值顺序"><a href="#4-1-3-求值顺序" class="headerlink" title="4.1.3 求值顺序"></a>4.1.3 求值顺序</h3><p><strong>优先级和结合律规定了运算对象的组合方式, 但是未规定求值顺序.</strong> C++ 中有 4 种运算符明确规定了运算对象的求值顺序:</p>
+<h3 id="4-1-2-优先级与结合律">4.1.2 优先级与结合律</h3>
+<p><strong>复合表达式</strong>: 含有两个或多个运算符的表达式. 运算符的优先级和结合律决定了运算对象的组合方式. 括号无视普通的组合规则, 表达式中括号括起来的部分被当成一个单元来求值.</p>
+<h3 id="4-1-3-求值顺序">4.1.3 求值顺序</h3>
+<p><strong>优先级和结合律规定了运算对象的组合方式, 但是未规定求值顺序.</strong> C++ 中有 4 种运算符明确规定了运算对象的求值顺序:</p>
 <ol>
 <li>与运算符: <code>&amp;</code></li>
 <li>或运算符: <code>|</code></li>
 <li>条件运算符: <code>?:</code></li>
 <li>逗号运算符: <code>,</code></li>
 </ol>
-<p>对于那些未规定执行顺序的运算符, <u> 如果表达式指向并修改了同一对象, 将会引发错误并产生未定义的行为 </u>. </p>
+<p>对于那些未规定执行顺序的运算符, <u> 如果表达式指向并修改了同一对象, 将会引发错误并产生未定义的行为 </u>.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> x=<span class="hljs-built_in">f</span>()+<span class="hljs-built_in">g</span>()*<span class="hljs-built_in">h</span>()+<span class="hljs-built_in">j</span>()<br></code></pre></td></tr></table></figure>
-
 <p>如上述表达式:</p>
 <ul>
 <li>优先级规定: <code>g()</code> 的返回值与 <code>h()</code> 的返回值相乘</li>
@@ -413,14 +421,16 @@
 <p>若 f, g, h , j 函数相互无关, 那么函数的调用的顺序不受限制. 反之, 若几个函数影响同一对象, 那么它将产生未定义的行为.</p>
 <blockquote>
 <ul>
-<li><p>在不确定的时候用括号来强制规定表达式的逻辑关系.</p>
+<li>
+<p>在不确定的时候用括号来强制规定表达式的逻辑关系.</p>
 </li>
-<li><p>如果改变了某个运算对象的值, 在表达式的其他地方不要再使用这个运算对象. 除非改变运算对象的子表达式本身是另一个子表达式的运算对象 (如 <code>*++iter</code>).</p>
+<li>
+<p>如果改变了某个运算对象的值, 在表达式的其他地方不要再使用这个运算对象. 除非改变运算对象的子表达式本身是另一个子表达式的运算对象 (如 <code>*++iter</code>).</p>
 </li>
 </ul>
 </blockquote>
-<h2 id="4-2-算术运算符"><a href="#4-2-算术运算符" class="headerlink" title="4.2 算术运算符"></a>4.2 算术运算符</h2><div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304183244183.png" srcset="/img/loading.gif" lazyload alt="算术运算符" /> </div>
-
+<h2 id="4-2-算术运算符">4.2 算术运算符</h2>
+<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304183244183.png" srcset="/img/loading.gif" lazyload alt="算术运算符" /> </div>
 <p>算术运算符优先级如上所示, 遵循 <strong>左结合律</strong>, 运算对象和求值结果都是 <strong>右值</strong>.</p>
 <ul>
 <li><em>一元正号运算符, 加法运算符, 减法运算符都能作用于指针.</em></li>
@@ -428,10 +438,9 @@
 <li>一元负号运算符对运算对象值取负后, 返回运算对象值的一个 (提升后的) 副本.</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">bool</span> b=<span class="hljs-literal">true</span>; <span class="hljs-comment">// b 为bool类型</span><br>cout &lt;&lt; <span class="hljs-built_in">typeid</span>(-b).<span class="hljs-built_in">name</span>() &lt;&lt; endl; <span class="hljs-comment">// -b 的类型实际上为 int 类型, 表示 -1</span><br></code></pre></td></tr></table></figure>
-
-<p>对于 <code>/</code>, 整数的运算结果还是整数, 同时 <strong>向 0 取整</strong>. 对于 <code>%</code> 运算, 运算结果的 <strong>正负取决于分子的符号, 与分母符号无关</strong>.即有: $(-m)&#x2F;n &#x3D; m&#x2F;(-n)&#x3D; -(m&#x2F;n), (-m)%n&#x3D;-(m%n), m%(-n)&#x3D;m%n$</p>
-<h2 id="4-3-逻辑和关系运算符"><a href="#4-3-逻辑和关系运算符" class="headerlink" title="4.3 逻辑和关系运算符"></a>4.3 逻辑和关系运算符</h2><div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304192050379.png" srcset="/img/loading.gif" lazyload alt="image-20240304192050379" /> </div>
-
+<p>对于 <code>/</code>, 整数的运算结果还是整数, 同时 <strong>向 0 取整</strong>. 对于 <code>%</code> 运算, 运算结果的 <strong>正负取决于分子的符号, 与分母符号无关</strong>.即有: $(-m)/n = m/(-n)= -(m/n), (-m)%n=-(m%n), m%(-n)=m%n$</p>
+<h2 id="4-3-逻辑和关系运算符">4.3 逻辑和关系运算符</h2>
+<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304192050379.png" srcset="/img/loading.gif" lazyload alt="image-20240304192050379" /> </div>
 <p>逻辑运算符和关系运算符返回值都是布尔类型, 其中 <strong>关系运算符满足左结合律</strong>, 运算结果都是 <strong>右值</strong>.</p>
 <p>逻辑与和逻辑或运算符具有 <strong>短路求值</strong> 的特点:</p>
 <ul>
@@ -442,63 +451,66 @@
 <p>进行比较运算时, 除非比较的对象为 bool 型, 否则不要用布尔字面值 true and false 作为比较对象.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (val == <span class="hljs-literal">true</span>)...;<br><span class="hljs-comment">// 当 val 为 bool 类型时, 比较运算不会有问题.</span><br><span class="hljs-comment">// 当 val 为 int 类型时, 会将 true 转换成 1, 表达式变为 if (val == 1), 比较运算与预期效果不符.</span><br></code></pre></td></tr></table></figure>
 </blockquote>
-<h2 id="4-4-赋值运算符"><a href="#4-4-赋值运算符" class="headerlink" title="4.4 赋值运算符"></a>4.4 赋值运算符</h2><p>赋值运算符 <strong>左侧运算对象必须是左值, 结果类型是左侧运算对象的类型</strong>.</p>
+<h2 id="4-4-赋值运算符">4.4 赋值运算符</h2>
+<p>赋值运算符 <strong>左侧运算对象必须是左值, 结果类型是左侧运算对象的类型</strong>.</p>
 <p>可以使用初始值列表作为赋值运算符右侧运算对象, 若左侧运算对象是内置类型, 那么初始值列表最多只能包含一个值, <strong>小心类型转换过程中是否有信息损失的风险</strong>: 该值所占空间也不应该大于目标类型空间.</p>
 <p>无论左侧运算对象的类型是什么, 初始值列表都可以为空, 此时, 编译器创建一个 <strong>值初始化</strong> 的临时量赋值给左侧.</p>
-<h3 id="赋值运算符满足右结合律"><a href="#赋值运算符满足右结合律" class="headerlink" title="赋值运算符满足右结合律"></a>赋值运算符满足右结合律</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i,j;<br>i=j=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
-
+<h3 id="赋值运算符满足右结合律">赋值运算符满足右结合律</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i,j;<br>i=j=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
 <p>首先执行 <code>j=0</code>, 返回左侧运算对象即 <code>j</code>, 在执行 <code>i=j</code>.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i, *j;<br>i=j=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
-
 <p>即便 0 可以为指针与整型赋值, 但是 , 指针不能赋值给 <code>int</code> 类型, 因此上述是错误的. <u> 多重赋值语句中每一个对象, 它的对象与右侧对象相同或可以由其转换而来 </u>.</p>
 <blockquote>
 <p>谨慎赋值运算符在条件判断过程中的使用, 赋值运算符的优先级较低.</p>
 </blockquote>
-<h3 id="复合赋值运算符"><a href="#复合赋值运算符" class="headerlink" title="复合赋值运算符"></a>复合赋值运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">+=, -=, *=, /=, %=;			<span class="hljs-comment">// 算术运算符</span><br>&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, |=;		<span class="hljs-comment">// 位运算符</span><br></code></pre></td></tr></table></figure>
-
+<h3 id="复合赋值运算符">复合赋值运算符</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">+=, -=, *=, /=, %=;			<span class="hljs-comment">// 算术运算符</span><br>&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, |=;		<span class="hljs-comment">// 位运算符</span><br></code></pre></td></tr></table></figure>
 <p>等价于 <code>a = a op b;</code></p>
-<h2 id="4-5-递增和递减运算符"><a href="#4-5-递增和递减运算符" class="headerlink" title="4.5 递增和递减运算符"></a>4.5 递增和递减运算符</h2><p>递增递减运算符必须作用于 <strong>左值</strong> 运算对象. 前置版本将 <strong>对象本身作为左值返回</strong>, 后置版本将 <strong>对象原始值的副本作为右值返回</strong>.</p>
+<h2 id="4-5-递增和递减运算符">4.5 递增和递减运算符</h2>
+<p>递增递减运算符必须作用于 <strong>左值</strong> 运算对象. 前置版本将 <strong>对象本身作为左值返回</strong>, 后置版本将 <strong>对象原始值的副本作为右值返回</strong>.</p>
 <blockquote>
 <p><strong>除非必要, 否则不用递增递减运算符的后置版本</strong>: 因为后置版本需要保存元素对象的副本, 对于复杂的迭代器类型来说, 额外的工作量会增加很多.</p>
 </blockquote>
-<h3 id="在一条语句中混用解引用和递增运算符"><a href="#在一条语句中混用解引用和递增运算符" class="headerlink" title="在一条语句中混用解引用和递增运算符"></a>在一条语句中混用解引用和递增运算符</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> x=v.<span class="hljs-built_in">begin</span>();<br><span class="hljs-keyword">while</span>(x != v.<span class="hljs-built_in">end</span>() &amp;&amp; *x&gt;=<span class="hljs-number">0</span>)&#123;<br>    cout&lt;&lt; *x++ &lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
-
+<h3 id="在一条语句中混用解引用和递增运算符">在一条语句中混用解引用和递增运算符</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> x=v.<span class="hljs-built_in">begin</span>();<br><span class="hljs-keyword">while</span>(x != v.<span class="hljs-built_in">end</span>() &amp;&amp; *x&gt;=<span class="hljs-number">0</span>)&#123;<br>    cout&lt;&lt; *x++ &lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>上述结果先执行 <code>x++</code>, <code>*</code> 作用于 <code>x</code> 原来指向的值. 效果是: <u> 输出 <code>x</code> 开始指向的哪个元素, 并将指针向前移动一个单位 </u>.</p>
-<h3 id="运算对象的求值顺序未规定"><a href="#运算对象的求值顺序未规定" class="headerlink" title="运算对象的求值顺序未规定"></a>运算对象的求值顺序未规定</h3><p><u> 注意递增递减运算符会改变运算对象, 这时需要关注运算对象的求值顺序, 是否会产生未定义的行为.</u></p>
+<h3 id="运算对象的求值顺序未规定">运算对象的求值顺序未规定</h3>
+<p><u> 注意递增递减运算符会改变运算对象, 这时需要关注运算对象的求值顺序, 是否会产生未定义的行为.</u></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(beg!=s.<span class="hljs-built_in">end</span>() &amp;&amp; !<span class="hljs-built_in">isspace</span>(*beg))&#123;<br>    *beg = <span class="hljs-built_in">toupper</span>(*beg++);	<span class="hljs-comment">// 错误: 该赋值语句未定义</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>赋值运算符两端都使用了 beg, 并且左侧运算对象改变了 beg 的值, 所以上述赋值语句是未定义的.</p>
-<h2 id="4-6-成员访问运算符"><a href="#4-6-成员访问运算符" class="headerlink" title="4.6 成员访问运算符"></a>4.6 成员访问运算符</h2><p><code>ptr -&gt; men</code> 等价于 <code>(*ptr).mem</code>. </p>
+<h2 id="4-6-成员访问运算符">4.6 成员访问运算符</h2>
+<p><code>ptr -&gt; men</code> 等价于 <code>(*ptr).mem</code>.</p>
 <ul>
 <li>箭头运算符结果是 <strong>左值</strong>.</li>
 <li>点运算符: 当成员所属的对象是左值, 结果为左值; 当成员所属的对象是右值, 结果为右值.</li>
 </ul>
 <p>注意 <code>*</code> 的优先级低于 <code>.</code>, 上述括号不可省略.</p>
-<h2 id="4-7-条件运算符"><a href="#4-7-条件运算符" class="headerlink" title="4.7 条件运算符"></a>4.7 条件运算符</h2><p><code>cond ? expr1 : expr2;</code></p>
+<h2 id="4-7-条件运算符">4.7 条件运算符</h2>
+<p><code>cond ? expr1 : expr2;</code></p>
 <ul>
 <li><strong>条件运算符规定了求值顺序</strong>: 先计算 <code>cond</code> , 若 <code>cond</code> 为真, 对 <code>expr1</code> 求值并返回结果; 否则, 对 <code>expr2</code> 求值并返回结果.</li>
 <li>当条件运算符的两个表达式都是左值或能转换成同一种左值类型时, 运算的结果是左值; 否则运算结果为右值.</li>
 <li>条件运算符满足 <strong>右结合律</strong>.</li>
 </ul>
-<h3 id="嵌套条件运算符"><a href="#嵌套条件运算符" class="headerlink" title="嵌套条件运算符"></a>嵌套条件运算符</h3><p><code>a ? b : c ? d : e;</code></p>
+<h3 id="嵌套条件运算符">嵌套条件运算符</h3>
+<p><code>a ? b : c ? d : e;</code></p>
 <p>注意, <strong>结合律与求值顺序无关, 其只能说明运算对象的组合方式</strong>. 虽然条件运算符满足右结合律, 但是, 上述求值顺序仍然是: 先判断 <code>a</code> 的真值, 在以此来求 <code>b</code> 或者判断 <code>c</code> 的真值.</p>
 <p>只不过, 上述运算对象的组合方式是: <code>a ? b : (c ? d : e);</code></p>
-<h3 id="在输出表达式中使用条件运算符"><a href="#在输出表达式中使用条件运算符" class="headerlink" title="在输出表达式中使用条件运算符"></a>在输出表达式中使用条件运算符</h3><p>注意 <strong>条件运算符的优先级非常低, 低于 <code>&lt;&lt;</code></strong>.</p>
+<h3 id="在输出表达式中使用条件运算符">在输出表达式中使用条件运算符</h3>
+<p>注意 <strong>条件运算符的优先级非常低, 低于 <code>&lt;&lt;</code></strong>.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt; ((a&lt;<span class="hljs-number">100</span>)?f:t);	<span class="hljs-comment">// 输出 f or t</span><br>cout&lt;&lt; (a&lt;<span class="hljs-number">100</span>)?f:t;		<span class="hljs-comment">// 输出 a&lt;100 的结果</span><br>cout&lt;&lt; a&lt;<span class="hljs-number">100</span>?f:t;		<span class="hljs-comment">// 错误: 试图比较cout 与 100</span><br></code></pre></td></tr></table></figure>
-
 <p>第二条语句等价于:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt; (a&lt;<span class="hljs-number">100</span>);<br>cout ?f:t;<br></code></pre></td></tr></table></figure>
-
 <p>第三条语句等价于:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt;a;<br>cout&lt;<span class="hljs-number">100</span>?f:t;<br></code></pre></td></tr></table></figure>
-
-<h2 id="4-8-位运算符"><a href="#4-8-位运算符" class="headerlink" title="4.8 位运算符"></a>4.8 位运算符</h2><p>位运算符作用于整数类型, bitset 类型. 其将运算对象看成二进制位的集合.</p>
+<h2 id="4-8-位运算符">4.8 位运算符</h2>
+<p>位运算符作用于整数类型, bitset 类型. 其将运算对象看成二进制位的集合.</p>
 <div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240305114900117.png" srcset="/img/loading.gif" lazyload alt="位运算符" /> </div>
-
 <p>若运算对象是小整数类型, 那么它的值会被 <strong>提升</strong>. 同时, 运算对象可以是带符号类型 or 无符号类型, <strong>若处理带符号类型, 位运算符的处理方式依赖于机器</strong>. 并且, 由于左移操作可能会改变符号位, 因此是一种未定义的行为.</p>
 <ul>
 <li>左移运算符: 在右侧插入 0.</li>
-<li>右移运算符: 依赖于左侧运算对象的类型<ul>
+<li>右移运算符: 依赖于左侧运算对象的类型
+<ul>
 <li>运算对象为无符号类型, 在左侧插入 0.</li>
 <li>运算对象为有符号类型, 在左侧插入符号位的副本或者 0, 如何选取视具体环境而定.</li>
 </ul>
@@ -509,7 +521,8 @@
 <li>比算术运算符优先级低.</li>
 <li>比关系运算符, 逻辑运算符, 赋值运算符, 条件运算符优先级高.</li>
 </ul>
-<h2 id="4-9-sizeof-运算符"><a href="#4-9-sizeof-运算符" class="headerlink" title="4.9 sizeof 运算符"></a>4.9 sizeof 运算符</h2><p><code>sizeof</code> 运算符返回一条 <strong>表达式</strong> 或者一个 <strong>类型名字</strong> 所占的字节数. 满足 <strong>右结合律</strong>, 返回 <code>size_t</code> 类型的 <strong>常量表达式</strong>. 运算符的运算对象有两种形式:</p>
+<h2 id="4-9-sizeof-运算符">4.9 sizeof 运算符</h2>
+<p><code>sizeof</code> 运算符返回一条 <strong>表达式</strong> 或者一个 <strong>类型名字</strong> 所占的字节数. 满足 <strong>右结合律</strong>, 返回 <code>size_t</code> 类型的 <strong>常量表达式</strong>. 运算符的运算对象有两种形式:</p>
 <ul>
 <li><code>sizeof (type)</code></li>
 <li><code>sizeof expr</code></li>
@@ -526,8 +539,8 @@
 </ul>
 <p>可以利用 <code>sizeof</code> 来计算数组中元素的个数, 同时由于返回结果是常量表达式, 可以用 <code>sizeof</code> 的结果声明数组的维度.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a[<span class="hljs-number">10</span>];<br><span class="hljs-keyword">constexpr</span> <span class="hljs-type">size_t</span> sz=<span class="hljs-built_in">sizeof</span>(a)/<span class="hljs-built_in">sizeof</span>(*a);<br></code></pre></td></tr></table></figure>
-
-<h2 id="4-10-类型转换"><a href="#4-10-类型转换" class="headerlink" title="4.10 类型转换"></a>4.10 类型转换</h2><p>若两种类型可以 <strong>相互转换</strong>, 那么它们就是关联的.</p>
+<h2 id="4-10-类型转换">4.10 类型转换</h2>
+<p>若两种类型可以 <strong>相互转换</strong>, 那么它们就是关联的.</p>
 <p><strong>隐式转换</strong>: 类型转换是自动进行的, 无须程序员的介入. 有以下几种情况会发生隐式类型转换:</p>
 <ul>
 <li>在大多数表达式中, <strong>比 int 类型小的整型值首先提升为较大的整数类型</strong>.</li>
@@ -536,18 +549,23 @@
 <li>如果算术运算或者关系运算的运算对象有多种类型, 需转化成同一种类型.</li>
 <li>函数调用时也会发生类型转换.</li>
 </ul>
-<h3 id="4-11-1-算术转换"><a href="#4-11-1-算术转换" class="headerlink" title="4.11.1 算术转换"></a>4.11.1 算术转换</h3><p>算术转换: 将一种算术类型转换成另一种算术类型. 算术转换定义了一套类型转换的层次, 其中运算符的运算对象将转换成 <strong>最宽的类型</strong>.</p>
-<h4 id="整数提升"><a href="#整数提升" class="headerlink" title="整数提升"></a>整数提升</h4><p>将小整数类型转换成较大的整数类型.</p>
+<h3 id="4-11-1-算术转换">4.11.1 算术转换</h3>
+<p>算术转换: 将一种算术类型转换成另一种算术类型. 算术转换定义了一套类型转换的层次, 其中运算符的运算对象将转换成 <strong>最宽的类型</strong>.</p>
+<h4 id="整数提升">整数提升</h4>
+<p>将小整数类型转换成较大的整数类型.</p>
 <ul>
 <li><code>bool, char, short char, unsigned char, short, unsigned short</code> 等类型, 若它们的值都能存在 <code>int</code> 里, 它们会提升为 <code>int</code> 类型; 否则, 提升为 <code>unsigned int</code> 类型.</li>
 <li>较大的 <code>char</code> 类型, 如 <code>wchar_t, char16_t, char32_t</code> 提升为 <code>int, unsigned int, long, unsigned long, long long, unsigned long long</code> 中的能容纳原来类型的最小类型.</li>
 </ul>
-<h4 id="无符号类型的运算对象"><a href="#无符号类型的运算对象" class="headerlink" title="无符号类型的运算对象"></a>无符号类型的运算对象</h4><p>对于无符号类型的运算对象, 首先进行整数提升:</p>
+<h4 id="无符号类型的运算对象">无符号类型的运算对象</h4>
+<p>对于无符号类型的运算对象, 首先进行整数提升:</p>
 <ul>
 <li>若 (提升后) 运算对象都是有符号, 或者都是无符号类型, 那么小类型的运算对象转换成较大的类型.</li>
-<li>若既有无符号类型运算对象, 也有有符号类型运算对象<ul>
-<li>若无符号类型 &gt;&#x3D; 有符号类型: 有符号类型转换成无符号类型. 如 <code>int</code> -&gt; <code>unsigned int</code></li>
-<li>若无符号类型 &lt; 有符号类型: 转换结果依赖于机器<ul>
+<li>若既有无符号类型运算对象, 也有有符号类型运算对象
+<ul>
+<li>若无符号类型 &gt;= 有符号类型: 有符号类型转换成无符号类型. 如 <code>int</code> -&gt; <code>unsigned int</code></li>
+<li>若无符号类型 &lt; 有符号类型: 转换结果依赖于机器
+<ul>
 <li>若无符号类型所有值都能存在于该有符号类型中, 那么无符号类型转换成有符号类型</li>
 <li>否则, 有符号类型转换成无符号类型.</li>
 </ul>
@@ -555,9 +573,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="4-11-2-其他隐式类型转换"><a href="#4-11-2-其他隐式类型转换" class="headerlink" title="4.11.2 其他隐式类型转换"></a>4.11.2 其他隐式类型转换</h3><ul>
+<h3 id="4-11-2-其他隐式类型转换">4.11.2 其他隐式类型转换</h3>
+<ul>
 <li><strong>数组转换成指针</strong>: 注意在 <code>decltype, &amp;, sizeof, typeid</code> 中, 上述转换不会发生.</li>
-<li><strong>指针的转换</strong>:<ul>
+<li><strong>指针的转换</strong>:
+<ul>
 <li>整数 0 或字面值 <code>nullptr</code> 能转换成任意指针类型.</li>
 <li>指向任意非常量的指针能转换成 <code>void*</code>.</li>
 <li>指向任意对象的指针能转换成 <code>const void*</code>.</li>
@@ -567,24 +587,28 @@
 <li><strong>转换成常量</strong>: 指向非常量类型的指针转换成指向常量类型的指针, 对引用同样适用. (反向不适用)</li>
 <li><strong>类类型定义的转换</strong>: 类类型能定义由编译器自动执行转换, 不过编译器 <strong>每次只能执行一次类类型的转换</strong>. 如字符串字面值 to <code>string</code> 的转换, <code>cin</code> to <code>bool</code> 的转换.</li>
 </ul>
-<h3 id="4-11-3-显式转换"><a href="#4-11-3-显式转换" class="headerlink" title="4.11.3 显式转换"></a>4.11.3 显式转换</h3><p><strong>强制类型转换</strong> 的格式: <code>cast-name&lt;type&gt;(expression)</code>.</p>
+<h3 id="4-11-3-显式转换">4.11.3 显式转换</h3>
+<p><strong>强制类型转换</strong> 的格式: <code>cast-name&lt;type&gt;(expression)</code>.</p>
 <ul>
 <li><code>canst-name</code>: 指定转换的类型, 有 <code>static_cast, dynamic_cast, const_cast, reinterpret_cast</code>.</li>
 <li><code>type</code>: 目标类型</li>
 <li><code>expression</code>: 要转换的对象</li>
 </ul>
-<h4 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h4><p>任何具有明确定义的类型转换, 只要不包含底层 const, 都可以使用 static_cast. 以下是 static_cast 的常用之处:</p>
+<h4 id="static-cast">static_cast</h4>
+<p>任何具有明确定义的类型转换, 只要不包含底层 const, 都可以使用 static_cast. 以下是 static_cast 的常用之处:</p>
 <ul>
 <li>当需要把较大算术类型转换为较小算术类型, 此时尽管会有精度损失, 编译器不会警告.</li>
 <li>编译器无法自动执行的类型转换, 如找回 <code>void*</code> 原来的类型.</li>
 </ul>
-<h4 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h4><p><strong>const_cast 只能改变运算对象的底层 const</strong>. 且只有 cosnt_cast 能改变表达式的常量属性, 其他形式的强制类型转换改变表达式的常量属性都会引发编译错误.</p>
+<h4 id="const-cast">const_cast</h4>
+<p><strong>const_cast 只能改变运算对象的底层 const</strong>. 且只有 cosnt_cast 能改变表达式的常量属性, 其他形式的强制类型转换改变表达式的常量属性都会引发编译错误.</p>
 <p>对于将常量对象转化为非常量对象, 称为 “去掉 const 性质”. 一旦去掉 const 性质, 就获得了对该对象的写权限.</p>
 <p>如果对象本身不是一个常量, 去 cosnt 性质是合法的.  但是, <strong>若对象本身就是一个常量, 此时去 const 性质后执行写操作会产生未定义的行为.</strong></p>
 <p>const_cast 常用于有 <strong>函数重载</strong> 的上下文中.</p>
-<h4 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h4><p><em>reinterpret_cast 通常为运算对象的位模式提供较低层次上的重新解释.</em></p>
-<h4 id="旧强制类型转换"><a href="#旧强制类型转换" class="headerlink" title="旧强制类型转换"></a>旧强制类型转换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">type</span> (expr); <span class="hljs-comment">// 函数形式的强制类型转换</span><br>(type) expr; <span class="hljs-comment">// C 语言风格的强制类型转换</span><br></code></pre></td></tr></table></figure>
-
+<h4 id="reinterpret-cast">reinterpret_cast</h4>
+<p><em>reinterpret_cast 通常为运算对象的位模式提供较低层次上的重新解释.</em></p>
+<h4 id="旧强制类型转换">旧强制类型转换</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">type</span> (expr); <span class="hljs-comment">// 函数形式的强制类型转换</span><br>(type) expr; <span class="hljs-comment">// C 语言风格的强制类型转换</span><br></code></pre></td></tr></table></figure>
 <p>旧强制类型转换分别具有与 const_cast, static_cast, reinterpret_cast 相似的行为, 似具体情况而定.</p>
 <ul>
 <li>若换成 const_cast 和 static_cast 也合法, 则其行为与对应的命名转换一致.</li>

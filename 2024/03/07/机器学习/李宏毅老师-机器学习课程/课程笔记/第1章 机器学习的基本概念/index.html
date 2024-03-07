@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          927 字
+          891 字
         
       </span>
     
@@ -435,66 +435,137 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-1-章-机器学习与深度学习的基本概念"><a href="#第-1-章-机器学习与深度学习的基本概念" class="headerlink" title="第 1 章 机器学习与深度学习的基本概念"></a>第 1 章 机器学习与深度学习的基本概念</h1><h2 id="1-1-机器学习任务"><a href="#1-1-机器学习任务" class="headerlink" title="1.1 机器学习任务"></a>1.1 机器学习任务</h2><p>Machine Learning &#x3D; <strong>Looking for Function</strong></p>
+                <h1>第 1 章 机器学习与深度学习的基本概念</h1>
+<h2 id="1-1-机器学习任务">1.1 机器学习任务</h2>
+<p>Machine Learning = <strong>Looking for Function</strong></p>
 <ul>
 <li><code>Regression (回归)</code>：输出一个数值</li>
 <li><code>Classification (分类)</code>：给出多种类别，函数输出正确的类别</li>
 <li><code>Structured Learning (创造)</code>：生成图片、文档等结构化东西</li>
 </ul>
-<h2 id="1-2-如何定义函数"><a href="#1-2-如何定义函数" class="headerlink" title="1.2 如何定义函数"></a>1.2 如何定义函数</h2><h3 id="步骤1：-猜测函数"><a href="#步骤1：-猜测函数" class="headerlink" title="步骤1： 猜测函数"></a>步骤1： 猜测函数</h3><p>函数也称为<code>Model (模型)</code>, Model 的猜测基于 <code>domain knowledge (领域知识)</code>.</p>
-<p>Model: $y&#x3D;b+w x_1$, 其中:</p>
+<h2 id="1-2-如何定义函数">1.2 如何定义函数</h2>
+<h3 id="步骤1：-猜测函数">步骤1： 猜测函数</h3>
+<p>函数也称为<code>Model (模型)</code>, Model 的猜测基于 <code>domain knowledge (领域知识)</code>.</p>
+<p>Model: $y=b+w x_1$, 其中:</p>
 <ul>
 <li>$x_1$称为 <code>feture (特征值)</code>.</li>
 <li>$w,b$ 为未知参数, $w$ 称为 <code>weight (权重)</code>, $b$ 称为 <code>bias (偏置)</code>.</li>
 </ul>
-<h3 id="步骤2-定义Loss"><a href="#步骤2-定义Loss" class="headerlink" title="步骤2: 定义Loss"></a>步骤2: 定义Loss</h3><p><code>Loss</code> 是一个函数 $L(b,w)$, 其作用是判断一组未知参数的值的好坏.<br>$$<br>Loss:L(b,w)&#x3D;\frac{1}{N}\sum_n e_n \<br>$$<br>其中 $e$ 是真实值与损失值的误差:</p>
+<h3 id="步骤2-定义Loss">步骤2: 定义Loss</h3>
+<p><code>Loss</code> 是一个函数 $L(b,w)$, 其作用是判断一组未知参数的值的好坏.<br>
+$$<br>
+Loss:L(b,w)=\frac{1}{N}\sum_n e_n \<br>
+$$<br>
+其中 $e$ 是真实值与损失值的误差:</p>
 <ul>
-<li><code>MAE</code>: L is mean absolute error $e&#x3D;|y-\widehat{y}|$</li>
-<li><code>MSE</code>: L is mean square error $e&#x3D;(y-\widehat{y})^2$​</li>
+<li><code>MAE</code>: L is mean absolute error $e=|y-\widehat{y}|$</li>
+<li><code>MSE</code>: L is mean square error $e=(y-\widehat{y})^2$​</li>
 </ul>
 <p>根据不同参数 $b,w$ 计算出的 $Loss$ 值可以画成直观的 <code>Error Surface (损失曲面)</code>.</p>
-<h3 id="步骤3-优化"><a href="#步骤3-优化" class="headerlink" title="步骤3: 优化"></a>步骤3: 优化</h3><p>为了寻找 $w^*,b^*&#x3D; \arg \min_{w,b} {L}$​, 可以使用 <strong>Gradient Descent (梯度下降)</strong> 法: 搜索出来一个能够让函数的值尽可能小的位置.</p>
+<h3 id="步骤3-优化">步骤3: 优化</h3>
+<p>为了寻找 $w<sup>*,b</sup>*= \arg \min_{w,b} {L}$​, 可以使用 <strong>Gradient Descent (梯度下降)</strong> 法: 搜索出来一个能够让函数的值尽可能小的位置.</p>
 <blockquote>
 <p>以上述Model为例, Gradient Descent 的具体过程如下:</p>
 <ol>
-<li><p>随机寻找一组初始参数 $b^0,w^0$.</p>
+<li>
+<p>随机寻找一组初始参数 $b<sup>0,w</sup>0$.</p>
 </li>
-<li><p>分别求出 $L(b,w)$ 对 $b,w$ 的导数, 即:<br>$$<br>\frac{\partial{L}}{\partial{b}}|<em>{w&#x3D;w^0,b&#x3D;b^0}\<br>\frac{\partial{L}}{\partial{w}}|</em>{w&#x3D;w^0,b&#x3D;b^0}<br>$$</p>
+<li>
+<p>分别求出 $L(b,w)$ 对 $b,w$ 的导数, 即:<br>
+$$<br>
+\frac{\partial{L}}{\partial{b}}|<em>{w=w<sup>0,b=b</sup>0}\<br>
+\frac{\partial{L}}{\partial{w}}|</em>{w=w<sup>0,b=b</sup>0}<br>
+$$</p>
 </li>
-<li><p>根据单调性, 对 $b,w$ 的值进行一定的调整, 使 $L$ 的值减小<br>$$<br>\begin{array}{ll}<br>b^0-\eta\frac{\partial{L}}{\partial{b}}|<em>{w&#x3D;w^0,b&#x3D;b^0} &amp; \to b^1 \<br>w^0-\eta\frac{\partial{L}}{\partial{w}}|</em>{w&#x3D;w^0,b&#x3D;b^0} &amp; \to w^1<br>\end{array}<br>$$<br>其中 $\eta$ 为 <code>learning rate (学习率)</code></p>
+<li>
+<p>根据单调性, 对 $b,w$ 的值进行一定的调整, 使 $L$ 的值减小<br>
+$$<br>
+\begin{array}{ll}<br>
+b<sup>0-\eta\frac{\partial{L}}{\partial{b}}|_{w=w</sup>0,b=b^0} &amp; \to b^1 \<br>
+w<sup>0-\eta\frac{\partial{L}}{\partial{w}}|_{w=w</sup>0,b=b^0} &amp; \to w^1<br>
+\end{array}<br>
+$$<br>
+其中 $\eta$ 为 <code>learning rate (学习率)</code></p>
 </li>
-<li><p>重复 2, 3 步, 直到达到满意结果为止.</p>
+<li>
+<p>重复 2, 3 步, 直到达到满意结果为止.</p>
 </li>
 </ol>
 </blockquote>
 <p>Gradient Descent的缺点是<strong>不保证找到全局最小值, 而是趋于局部最小值</strong>.</p>
-<p>进一步, 可以根据预测结果, 使用多个 feature 来优化模型:<br>$$<br>y&#x3D;b+\sum_j w_jx_j<br>$$</p>
-<h2 id="1-3-New-Model"><a href="#1-3-New-Model" class="headerlink" title="1.3 New Model"></a>1.3 New Model</h2><p>上述例子为 <code>linear modeal (线性模型)</code>, 但是 <strong>linear modeal 有很大的局限性, 有些曲线无法用单一的 linear modeal 来表示</strong>. 更多情况下, 需要<strong>多段 S 型曲线</strong>来表示.<br>$$<br>\text{All Piecewise Linear Curves}&#x3D; \text{Constant} + \text{Sum of a set of S}<br>$$<br>越复杂的 Piecewise Linear Curves 需要越多的 S 来逼近.</p>
-<p>其中, S 型曲线可以用 <code>sigmoid function</code> 来表示:<br>$$<br>\begin{array}{l}<br>y &amp;&#x3D;c<em>\frac{1}{1+e^{-(b+wx_1)}}\<br>  &amp;&#x3D;c</em>sigmoid(b+wx_1)<br>\end{array}<br>$$</p>
+<p>进一步, 可以根据预测结果, 使用多个 feature 来优化模型:<br>
+$$<br>
+y=b+\sum_j w_jx_j<br>
+$$</p>
+<h2 id="1-3-New-Model">1.3 New Model</h2>
+<p>上述例子为 <code>linear modeal (线性模型)</code>, 但是 <strong>linear modeal 有很大的局限性, 有些曲线无法用单一的 linear modeal 来表示</strong>. 更多情况下, 需要<strong>多段 S 型曲线</strong>来表示.<br>
+$$<br>
+\text{All Piecewise Linear Curves}= \text{Constant} + \text{Sum of a set of S}<br>
+$$<br>
+越复杂的 Piecewise Linear Curves 需要越多的 S 来逼近.</p>
+<p>其中, S 型曲线可以用 <code>sigmoid function</code> 来表示:<br>
+$$<br>
+\begin{array}{l}<br>
+y &amp;=c*\frac{1}{1+e^{-(b+wx_1)}}\<br>
+&amp;=c*sigmoid(b+wx_1)<br>
+\end{array}<br>
+$$</p>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303100355796.png" srcset="/img/loading.gif" lazyload alt="image-20240303100355796" style="zoom:50%;" /></div>
-
 <p>对于改变不同参数的值, 曲线的变化如下:</p>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303100201215.png" srcset="/img/loading.gif" lazyload alt="image-20240303100201215" style="zoom: 50%;" /></div>
-
-
-<p>于是, 可以得到更加复杂准确的 Model:<br>$$<br>\begin{array}{l}<br>y &#x3D; b+wx_1 &amp; \to<br>y&#x3D; b+\sum_i{c_i<em>sigmoid(b_i+w_ix_1)}	\<br>y &#x3D; b+\sum_j{w_jx_j} &amp; \to<br>y &#x3D; b+\sum_i{c_i</em>sigmoid(b_i+\sum_j{w_{ij}x_j})}<br>\end{array}<br>$$<br>接下来, 对 $sigmoid$ 中的 $b_i+\sum_j{w_{ij}{x_j}}$ 进行简化:<br>$$<br>\begin{array}{ll}<br>r_1 &amp; &#x3D;b_1+w_{11}x_1+w_{12}x_2+w_{13}x_3	\<br>r_2 &amp; &#x3D;b_2+w_{21}x_1+w_{22}x_2+w_{23}x_3	\<br>r_3 &amp; &#x3D;b_3+w_{31}x_1+w_{32}x_2+w_{33}x_3	\<br>\end{array}<br>$$</p>
-<h1 id="begin-bmatrix-r-1-r-2-r-3-end-bmatrix"><a href="#begin-bmatrix-r-1-r-2-r-3-end-bmatrix" class="headerlink" title="$$\begin{bmatrix}r_1\r_2\r_3\end{bmatrix}"></a>$$<br>\begin{bmatrix}<br>r_1\<br>r_2\<br>r_3<br>\end{bmatrix}</h1><p>\begin{bmatrix}<br>w_{11} &amp; w_{12} &amp; w_{13}\<br>w_{21} &amp; w_{22} &amp; w_{23}\<br>w_{31} &amp; w_{32} &amp; w_{33}<br>\end{bmatrix}<br>*<br>\begin{bmatrix}<br>x_1\<br>x_2\<br>x_3<br>\end{bmatrix}<br>$$</p>
-<p>$$<br>r&#x3D;b+wx<br>$$</p>
-<p>可见, 上述公式可以简化为我们最初的样子$r&#x3D;b+wx$</p>
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>优化的过程同样是 Gradient Descent, 式子的形式也相同, 只不过参数增加了.</p>
+<p>于是, 可以得到更加复杂准确的 Model:<br>
+$$<br>
+\begin{array}{l}<br>
+y = b+wx_1 &amp; \to<br>
+y= b+\sum_i{c_i<em>sigmoid(b_i+w_ix_1)}	\<br>
+y = b+\sum_j{w_jx_j} &amp; \to<br>
+y = b+\sum_i{c_i</em>sigmoid(b_i+\sum_j{w_{ij}x_j})}<br>
+\end{array}<br>
+$$<br>
+接下来, 对 $sigmoid$ 中的 $b_i+\sum_j{w_{ij}{x_j}}$ 进行简化:<br>
+$$<br>
+\begin{array}{ll}<br>
+r_1 &amp; =b_1+w_{11}x_1+w_{12}x_2+w_{13}x_3	\<br>
+r_2 &amp; =b_2+w_{21}x_1+w_{22}x_2+w_{23}x_3	\<br>
+r_3 &amp; =b_3+w_{31}x_1+w_{32}x_2+w_{33}x_3	\<br>
+\end{array}<br>
+$$</p>
+<h1>$$<br>
+\begin{bmatrix}<br>
+r_1\<br>
+r_2\<br>
+r_3<br>
+\end{bmatrix}</h1>
+<p>\begin{bmatrix}<br>
+w_{11} &amp; w_{12} &amp; w_{13}\<br>
+w_{21} &amp; w_{22} &amp; w_{23}\<br>
+w_{31} &amp; w_{32} &amp; w_{33}<br>
+\end{bmatrix}<br>
+*<br>
+\begin{bmatrix}<br>
+x_1\<br>
+x_2\<br>
+x_3<br>
+\end{bmatrix}<br>
+$$</p>
+<p>$$<br>
+r=b+wx<br>
+$$</p>
+<p>可见, 上述公式可以简化为我们最初的样子$r=b+wx$</p>
+<h3 id="优化">优化</h3>
+<p>优化的过程同样是 Gradient Descent, 式子的形式也相同, 只不过参数增加了.</p>
 <p>同时, 可以做如下优化:</p>
 <div style="text-align: center;">
     <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303093126998.png" srcset="/img/loading.gif" lazyload alt="image-20240303093126998" style="zoom: 33%;" />
 </div>
-
-<p>即将训练数据集划分为多个 <code>batch</code>, 每一批来进行 Gradient Descent, 完成所有 <code>update</code> 称为一次 <code>epoch</code>. 因此 <strong>1 epoch &#x3D; see all the batches once</strong>.</p>
-<h3 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h3><p>上述 <code>sigmoid</code> 称为 <code>activation function (激活函数)</code>, 除了 sigmoid, 还有 <code>ReLU</code>. <del>(其实就是用两个分段曲线拼成一个 S 型曲线)</del></p>
+<p>即将训练数据集划分为多个 <code>batch</code>, 每一批来进行 Gradient Descent, 完成所有 <code>update</code> 称为一次 <code>epoch</code>. 因此 <strong>1 epoch = see all the batches once</strong>.</p>
+<h3 id="Activation-function">Activation function</h3>
+<p>上述 <code>sigmoid</code> 称为 <code>activation function (激活函数)</code>, 除了 sigmoid, 还有 <code>ReLU</code>. <s>(其实就是用两个分段曲线拼成一个 S 型曲线)</s></p>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303094725966.png" srcset="/img/loading.gif" lazyload alt="image-20240303094725966" style="zoom:33%;" /></div>
-
-<h3 id="multiple-hidden-layers"><a href="#multiple-hidden-layers" class="headerlink" title="multiple hidden layers"></a>multiple hidden layers</h3><p>同时, 可以<strong>增加 activation function</strong> 的运算次数, 即增加多个<strong>隐藏层</strong>.</p>
+<h3 id="multiple-hidden-layers">multiple hidden layers</h3>
+<p>同时, 可以<strong>增加 activation function</strong> 的运算次数, 即增加多个<strong>隐藏层</strong>.</p>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303095234858.png" srcset="/img/loading.gif" lazyload alt="image-20240303095234858" style="zoom: 33%;" /></div>
-
-<p>其中每个 <code>sigmoid</code> 称为 <code>Neuron</code> , 多层 hidden layers 就形成 <code>Neural Network</code>, 层数不断增加, 就形成了 <code>deep learning</code>, <strong>Deep &#x3D; Many hidden layers</strong>.</p>
+<p>其中每个 <code>sigmoid</code> 称为 <code>Neuron</code> , 多层 hidden layers 就形成 <code>Neural Network</code>, 层数不断增加, 就形成了 <code>deep learning</code>, <strong>Deep = Many hidden layers</strong>.</p>
 
                 
               </div>

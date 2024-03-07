@@ -372,12 +372,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-5-章-语句"><a href="#第-5-章-语句" class="headerlink" title="第 5 章 语句"></a>第 5 章 语句</h1><h2 id="5-1-简单语句"><a href="#5-1-简单语句" class="headerlink" title="5.1 简单语句"></a>5.1 简单语句</h2><ul>
-<li><p><strong>表达式语句</strong>: 表达式 + <code>;</code> 就形成表达式语句, 其作用是执行表达式并丢掉求值结果.</p>
+                <h1>第 5 章 语句</h1>
+<h2 id="5-1-简单语句">5.1 简单语句</h2>
+<ul>
+<li>
+<p><strong>表达式语句</strong>: 表达式 + <code>;</code> 就形成表达式语句, 其作用是执行表达式并丢掉求值结果.</p>
 </li>
-<li><p><strong>空语句</strong>: 只含一个单独的 <code>;</code>, 逻辑上不需要, 但语法上需要的语句时使用.</p>
+<li>
+<p><strong>空语句</strong>: 只含一个单独的 <code>;</code>, 逻辑上不需要, 但语法上需要的语句时使用.</p>
 </li>
-<li><p><strong>复合语句 (块)</strong>: 用花括号括起来的语句和声明序列, 一个块就是一个作用域. 语法上需要一条语句, 逻辑上需要多条语句时使用. 空块类似于空语句.</p>
+<li>
+<p><strong>复合语句 (块)</strong>: 用花括号括起来的语句和声明序列, 一个块就是一个作用域. 语法上需要一条语句, 逻辑上需要多条语句时使用. 空块类似于空语句.</p>
 </li>
 </ul>
 <blockquote>
@@ -391,17 +396,18 @@
 <li>块不以分号作为结束.</li>
 </ul>
 </blockquote>
-<h2 id="5-2-条件语句"><a href="#5-2-条件语句" class="headerlink" title="5.2 条件语句"></a>5.2 条件语句</h2><h3 id="5-2-1-if-语句"><a href="#5-2-1-if-语句" class="headerlink" title="5.2.1 if 语句"></a>5.2.1 if 语句</h3><p><strong>if 语句</strong>: 判断一个指定的条件是否为真, 根据判断结果决定是否执行另一条语句.</p>
+<h2 id="5-2-条件语句">5.2 条件语句</h2>
+<h3 id="5-2-1-if-语句">5.2.1 if 语句</h3>
+<p><strong>if 语句</strong>: 判断一个指定的条件是否为真, 根据判断结果决定是否执行另一条语句.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 语法形式</span><br><span class="hljs-comment">// 含 else 分支</span><br><span class="hljs-keyword">if</span> (condition)<br>    statement;<br><span class="hljs-keyword">else</span><br>    statement2;<br><span class="hljs-comment">// 不含 else 分支</span><br><span class="hljs-keyword">if</span> (condition)<br>    statement;<br></code></pre></td></tr></table></figure>
-
 <blockquote>
 <p>[!Tip]</p>
 <p>使用 if, while, for 等语句时, 最好使用花括号. 避免代码混淆不清, 同时可以方便添加代码.</p>
 </blockquote>
 <p>if-else 的匹配问题: 对于 <strong>悬垂 else</strong>, C++ 规定 <strong>else 与它最近的尚未匹配的 if 匹配</strong>. 同时, 可以使用花括号来控制执行路径.</p>
-<h3 id="5-2-2-switch-语句"><a href="#5-2-2-switch-语句" class="headerlink" title="5.2.2 switch 语句"></a>5.2.2 switch 语句</h3><p><strong>switch 语句</strong>: 方便在多个固定选项中做出选择.</p>
+<h3 id="5-2-2-switch-语句">5.2.2 switch 语句</h3>
+<p><strong>switch 语句</strong>: 方便在多个固定选项中做出选择.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">switch</span> (ch) &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;a&#x27;</span>:<br>        statement1;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;b&#x27;</span>:<br>        statement2;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;c&#x27;</span>:<br>        statement3;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;d&#x27;</span>:<br>        statement4;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">default</span>:<br>        statement5;<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p><strong>case 标签</strong>: case 关键字和它对应的值一起被称为 case 标签.</p>
 <blockquote>
 <p>[!Warning]</p>
@@ -410,7 +416,8 @@
 <li>case 标签的值不能相同.</li>
 </ul>
 </blockquote>
-<h4 id="switch-内部的控制流"><a href="#switch-内部的控制流" class="headerlink" title="switch 内部的控制流"></a>switch 内部的控制流</h4><p>如果某个 case 标签匹配成功, 将从该标签开始往后顺序执行 <strong>所有 case 分支</strong>, 除非程序显示中断这一过程, 否则直到 switch 的结尾处才会停止.</p>
+<h4 id="switch-内部的控制流">switch 内部的控制流</h4>
+<p>如果某个 case 标签匹配成功, 将从该标签开始往后顺序执行 <strong>所有 case 分支</strong>, 除非程序显示中断这一过程, 否则直到 switch 的结尾处才会停止.</p>
 <p><strong>default 标签</strong>: 若无法找到对应的 case 标签, 若有 default 声明, 程序将跳转到 default 处; 否则, 程序会跳转到 switch 的下一条语句.</p>
 <blockquote>
 <p>[!Tip]</p>
@@ -421,28 +428,29 @@
 <p>[!Warning]</p>
 <p>标签不应独立存在, 其后面必须跟上一条语句或另一个 case 标签.</p>
 </blockquote>
-<h4 id="switch-内部的变量定义"><a href="#switch-内部的变量定义" class="headerlink" title="switch 内部的变量定义"></a>switch 内部的变量定义</h4><p>若匹配到某个特定 case 标签, switch 结构中该 case 标签之前的部分会被忽略. 但是若先前的 “变量的定义” 被忽略了, 后续使用该变量会出现一些问题.</p>
+<h4 id="switch-内部的变量定义">switch 内部的变量定义</h4>
+<p>若匹配到某个特定 case 标签, switch 结构中该 case 标签之前的部分会被忽略. 但是若先前的 “变量的定义” 被忽略了, 后续使用该变量会出现一些问题.</p>
 <p>对于 C++ : <strong>如果在某处一个带有初值的变量位于作用域之外, 在另一处该变量位于作用域之内, 则从前一处跳转到后一处的行为是非法的</strong>. 即 <strong>不允许跨过变量的初始化语句直接跳转到变量作用域内的另一个位置</strong>.</p>
 <div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240306113745854.png" srcset="/img/loading.gif" lazyload alt="image-20240306113745854" /> </div>
-
 <p>如果需要为某个 case 分支定义并初始化一个变量, 应该将变量 <strong>定义在块内</strong>, 从而确保后面所有的 case 标签都在变量作用域之外.</p>
-<h2 id="5-4-迭代语句"><a href="#5-4-迭代语句" class="headerlink" title="5.4 迭代语句"></a>5.4 迭代语句</h2><h3 id="5-4-1-while-语句"><a href="#5-4-1-while-语句" class="headerlink" title="5.4.1 while 语句"></a>5.4.1 while 语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (condition)<br>    statement;<br></code></pre></td></tr></table></figure>
-
-<h3 id="5-4-2-do-while-语句"><a href="#5-4-2-do-while-语句" class="headerlink" title="5.4.2 do while 语句"></a>5.4.2 do while 语句</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">do</span>&#123;<br>    statement;<br>&#125;<span class="hljs-keyword">while</span> (condition)<br></code></pre></td></tr></table></figure>
-
+<h2 id="5-4-迭代语句">5.4 迭代语句</h2>
+<h3 id="5-4-1-while-语句">5.4.1 while 语句</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (condition)<br>    statement;<br></code></pre></td></tr></table></figure>
+<h3 id="5-4-2-do-while-语句">5.4.2 do while 语句</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">do</span>&#123;<br>    statement;<br>&#125;<span class="hljs-keyword">while</span> (condition)<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>[!Note]</p>
 <p>while 与 do while 语句仅在执行顺序上有所区别. 另外, while 语句的 condition 中可以定义循环控制变量. 但是 do while 语句中的 condition 中就不适合定义循环控制变量.</p>
 </blockquote>
-<h3 id="5-4-3-for-语句"><a href="#5-4-3-for-语句" class="headerlink" title="5.4.3 for 语句"></a>5.4.3 for 语句</h3><h4 id="传统-for-语句"><a href="#传统-for-语句" class="headerlink" title="传统 for 语句"></a>传统 for 语句</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (init-statement; condition; expression)<br>    statement;<br></code></pre></td></tr></table></figure>
-
+<h3 id="5-4-3-for-语句">5.4.3 for 语句</h3>
+<h4 id="传统-for-语句">传统 for 语句</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (init-statement; condition; expression)<br>    statement;<br></code></pre></td></tr></table></figure>
 <p>其中, init-statement 可以定义多个对象, 但是只能有 <strong>一条</strong> 声明语句, 所以这多个对象的类型需要相同.同时, init-statement, condition, expression 语句可以省略, 但是 <strong>分号</strong> 不可省略.</p>
-<h4 id="for-范围语句"><a href="#for-范围语句" class="headerlink" title="for 范围语句"></a>for 范围语句</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (declaration : expression)<br>    statement;<br></code></pre></td></tr></table></figure>
-
+<h4 id="for-范围语句">for 范围语句</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (declaration : expression)<br>    statement;<br></code></pre></td></tr></table></figure>
 <p>express 的值必须是一个 <strong>序列</strong>, 可以是初始值列表, 数组, vector 对象, string 对象等, 这些类型共同特点是都能返回迭代器对象的 begin 和 end 成员.</p>
 <p>declaration 定义一个变量, 序列中的每个元素都能转换成变量的类型. 可以使用 auto 类型说明符. 如果需要改变序列的元素, 需要将变量声明为 <strong>引用类型</strong>.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;r : v)&#123;<br>    r*=<span class="hljs-number">2</span>;<br>&#125;<br><span class="hljs-comment">// 等价于</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> beg = v.<span class="hljs-built_in">begin</span>(), end=v.<span class="hljs-built_in">end</span>(); beg!=end; ++beg)&#123;<br>    <span class="hljs-keyword">auto</span> &amp;r = *beg;<br>    r*=<span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>由于事先 <strong>预存了 end</strong> 的值, 在循环中增加或删除容器中元素可能会是预存的 end 函数值无效, 所以上述操作是非法的.</p>
 
                 

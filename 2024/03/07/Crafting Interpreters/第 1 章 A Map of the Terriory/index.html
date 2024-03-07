@@ -386,48 +386,61 @@
             
               <div class="markdown-body">
                 
-                <h1 id="第-1-章-A-Map-of-the-Territory"><a href="#第-1-章-A-Map-of-the-Territory" class="headerlink" title="第 1 章 A Map of the Territory"></a>第 1 章 A Map of the Territory</h1><h2 id="1-1-语言各部分"><a href="#1-1-语言各部分" class="headerlink" title="1.1 语言各部分"></a>1.1 语言各部分</h2><div style="text-align center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png" srcset="/img/loading.gif" lazyload alt="image-20240303114655871" style="zoom: 80%;" /></div>
-
-<h3 id="1-1-1-Scanning-扫描-词法分析"><a href="#1-1-1-Scanning-扫描-词法分析" class="headerlink" title="1.1.1 Scanning (扫描|词法分析)"></a>1.1.1 Scanning (扫描|词法分析)</h3><p><code>Scanning (扫描) </code>等同于 <code>lexing (词法分析)</code>, <code>Scanner (or lexer)</code> 的作用是: 接受线性字符流，并将它们切分成类似于“单词”的多个小单元，这些单元称为 <code>token (词法单元) </code>.</p>
+                <h1>第 1 章 A Map of the Territory</h1>
+<h2 id="1-1-语言各部分">1.1 语言各部分</h2>
+<div style="text-align center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png" srcset="/img/loading.gif" lazyload alt="image-20240303114655871" style="zoom: 80%;" /></div>
+<h3 id="1-1-1-Scanning-扫描-词法分析">1.1.1 Scanning (扫描|词法分析)</h3>
+<p><code>Scanning (扫描) </code>等同于 <code>lexing (词法分析)</code>, <code>Scanner (or lexer)</code> 的作用是: 接受线性字符流，并将它们切分成类似于“单词”的多个小单元，这些单元称为 <code>token (词法单元) </code>.</p>
 <p>词法单元可以是一个字符 <code>(</code>, 也可以是数字 <code>123</code>, 字符串 <code>hi</code>, 标识符 <code>cin</code></p>
 <p>源文件中一些字符是没有意义的, 比如空格和注释. Scanner会忽略这些, 最终得到一个简单的字符单元序列.</p>
 <p><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105116906.png" srcset="/img/loading.gif" lazyload alt="image-20240228105116906"></p>
 <p><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105133238.png" srcset="/img/loading.gif" lazyload alt="image-20240228105133238"></p>
-<h3 id="1-1-2-Parsing-解析-语法分析"><a href="#1-1-2-Parsing-解析-语法分析" class="headerlink" title="1.1.2 Parsing (解析|语法分析)"></a>1.1.2 Parsing (解析|语法分析)</h3><p><code>Parsing (解析) </code>即<code>语法分析</code>, <code>parser (解析器) </code>作用是：将<strong>词法单元序列转化为树形结构</strong>。因为树形结构能很好的反映语法的嵌套结构. 这些树称为 <code>parse tree, abstract syntax tree</code>. 同时，解析器的作用还包括检测 <code>syntax errors (语法错误)</code>.</p>
+<h3 id="1-1-2-Parsing-解析-语法分析">1.1.2 Parsing (解析|语法分析)</h3>
+<p><code>Parsing (解析) </code>即<code>语法分析</code>, <code>parser (解析器) </code>作用是：将<strong>词法单元序列转化为树形结构</strong>。因为树形结构能很好的反映语法的嵌套结构. 这些树称为 <code>parse tree, abstract syntax tree</code>. 同时，解析器的作用还包括检测 <code>syntax errors (语法错误)</code>.</p>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228102912591.png" srcset="/img/loading.gif" lazyload alt="image-20240228102912591" /></div>
-
-<h3 id="1-1-3-Static-analysis-静态分析"><a href="#1-1-3-Static-analysis-静态分析" class="headerlink" title="1.1.3 Static analysis (静态分析)"></a>1.1.3 Static analysis (静态分析)</h3><p>静态分析的任务是: <code>bingding (绑定) or resolution (决议) </code>, 即对于每一个标识符，找出定义该名字的地方，并将二者联系起来。</p>
+<h3 id="1-1-3-Static-analysis-静态分析">1.1.3 Static analysis (静态分析)</h3>
+<p>静态分析的任务是: <code>bingding (绑定) or resolution (决议) </code>, 即对于每一个标识符，找出定义该名字的地方，并将二者联系起来。</p>
 <p>要实现绑定，所有语义的信息都需要存储在某个地方，有以下地方可供选择：</p>
 <ul>
 <li>存储在语法树本身的<strong>属性</strong>字段中.（属性是节点的额外字段）</li>
 <li>存储在外部查找表中, 称其为<strong>符号表</strong>.</li>
 <li>将树转换为一个全新的数据结构, 更直接的表达代码的语义.</li>
 </ul>
-<h3 id="1-1-4-Intermediate-representations-中间码"><a href="#1-1-4-Intermediate-representations-中间码" class="headerlink" title="1.1.4 Intermediate representations (中间码)"></a>1.1.4 Intermediate representations (中间码)</h3><p>前面的内容属于 <code>front end (前端)</code>, 后续则是 <code>back end (后端)</code>, 在二者中间还有<code>middle end (中端)</code>.</p>
+<h3 id="1-1-4-Intermediate-representations-中间码">1.1.4 Intermediate representations (中间码)</h3>
+<p>前面的内容属于 <code>front end (前端)</code>, 后续则是 <code>back end (后端)</code>, 在二者中间还有<code>middle end (中端)</code>.</p>
 <p>前端关注源语言编写的程序, 后端则关注程序运行的整个架构. 而中端阶段, 代码被存储在 <code>Intermediate representations (中间代码)</code> 中, 这些中间代码与源文件或目的文件没有紧密的联系, 而是充当它们之间的<strong>接口</strong>.</p>
-<h3 id="1-1-5-Optimization-优化"><a href="#1-1-5-Optimization-优化" class="headerlink" title="1.1.5 Optimization (优化)"></a>1.1.5 Optimization (优化)</h3><p><code>Optimization (优化)</code>的任务是: 在理解用户的程序后，用另一个具有相同语义但是实现效率更高的程序来代替它.</p>
+<h3 id="1-1-5-Optimization-优化">1.1.5 Optimization (优化)</h3>
+<p><code>Optimization (优化)</code>的任务是: 在理解用户的程序后，用另一个具有相同语义但是实现效率更高的程序来代替它.</p>
 <p>比如, <code>constant floding (常量折叠)</code>: 可以在编译过程中计算出哪些简单的表达式, 并将计算结果直接替换表达式.</p>
-<h3 id="1-1-6-Code-generation-代码生成"><a href="#1-1-6-Code-generation-代码生成" class="headerlink" title="1.1.6 Code generation (代码生成)"></a>1.1.6 Code generation (代码生成)</h3><p>在优化用户程序之后, 需要将其转化为机器可以实际运行的代码, 即<code>Code generation (代码生成)</code>, 生成的代码通常是CPU运行的类似于汇编的原始指令.</p>
+<h3 id="1-1-6-Code-generation-代码生成">1.1.6 Code generation (代码生成)</h3>
+<p>在优化用户程序之后, 需要将其转化为机器可以实际运行的代码, 即<code>Code generation (代码生成)</code>, 生成的代码通常是CPU运行的类似于汇编的原始指令.</p>
 <p>但是, 不应该为芯片生成机器指令, 因为缺乏可移植性. 实际上, 编译器是为一个假设的, 理想化的机器编写代码, 成为<code>bytecode (字节码)</code>.</p>
-<h3 id="1-1-7-Virtual-machine-虚拟机"><a href="#1-1-7-Virtual-machine-虚拟机" class="headerlink" title="1.1.7 Virtual machine (虚拟机)"></a>1.1.7 Virtual machine (虚拟机)</h3><p>编译器产生字节码之后, 芯片仍然不能解析这些字节码, 还需进行翻译工作, 有以下两种方法:</p>
+<h3 id="1-1-7-Virtual-machine-虚拟机">1.1.7 Virtual machine (虚拟机)</h3>
+<p>编译器产生字节码之后, 芯片仍然不能解析这些字节码, 还需进行翻译工作, 有以下两种方法:</p>
 <ul>
 <li>为每个目标体系结构编写一个小型编译器, 将字节码转化为该机器的本机代码. 虽然仍然需要为每个芯片做翻译工作, 但是工作任务简单.</li>
 <li><em>可以编写<code>VM (虚拟机)</code>, 该程序可在运行时模拟支持虚拟架构的虚拟芯片. 运行字节码比翻译成本机代码运行要慢, 但好处是简单并且具有可移植性.</em></li>
 </ul>
-<h3 id="1-1-8-Runtime-运行时"><a href="#1-1-8-Runtime-运行时" class="headerlink" title="1.1.8 Runtime (运行时)"></a>1.1.8 Runtime (运行时)</h3><p>有时需要我们的语言在程序运行时提供一些特殊的服务, 比如自动内存管理: 需要一个垃圾收集器去回收未使用的bit. 这些东西是在<code>Runtime (运行时)</code>进行的，这些实现运行时的代码会直接插入到生成的可执行文件中.</p>
-<h2 id="1-2-捷径和备选路线"><a href="#1-2-捷径和备选路线" class="headerlink" title="1.2 捷径和备选路线"></a>1.2 捷径和备选路线</h2><h3 id="1-2-1-Single-pass-compilers-单遍编译器"><a href="#1-2-1-Single-pass-compilers-单遍编译器" class="headerlink" title="1.2.1 Single-pass compilers (单遍编译器)"></a>1.2.1 Single-pass compilers (单遍编译器)</h3><p>Single-pass compilers 将 parsing, analysis, and code generation 交织在一起, 使它们可以直接在 parser 中生成输出代码, 不需要其他 syntax trees.</p>
+<h3 id="1-1-8-Runtime-运行时">1.1.8 Runtime (运行时)</h3>
+<p>有时需要我们的语言在程序运行时提供一些特殊的服务, 比如自动内存管理: 需要一个垃圾收集器去回收未使用的bit. 这些东西是在<code>Runtime (运行时)</code>进行的，这些实现运行时的代码会直接插入到生成的可执行文件中.</p>
+<h2 id="1-2-捷径和备选路线">1.2 捷径和备选路线</h2>
+<h3 id="1-2-1-Single-pass-compilers-单遍编译器">1.2.1 Single-pass compilers (单遍编译器)</h3>
+<p>Single-pass compilers 将 parsing, analysis, and code generation 交织在一起, 使它们可以直接在 parser 中生成输出代码, 不需要其他 syntax trees.</p>
 <p><em>但是这类 Single-pass compilers 限制了语言的设计: 没有中间数据结构来存储程序, 不会重新访问任何之前解析过的代码的部分.</em></p>
-<h3 id="1-2-2-Tree-walk-interpreters-树遍历解释器"><a href="#1-2-2-Tree-walk-interpreters-树遍历解释器" class="headerlink" title="1.2.2 Tree-walk interpreters (树遍历解释器)"></a>1.2.2 Tree-walk interpreters (树遍历解释器)</h3><p><em>Tree-walk interpreters 将代码解析为 AST, 运行程序时, 解释器每次都会遍历语法树的一个分支和叶子, 并在计算每个节点.</em></p>
-<h3 id="1-2-3-Transpiler-转译器"><a href="#1-2-3-Transpiler-转译器" class="headerlink" title="1.2.3 Transpiler (转译器)"></a>1.2.3 Transpiler (转译器)</h3><div class="note note-info">
+<h3 id="1-2-2-Tree-walk-interpreters-树遍历解释器">1.2.2 Tree-walk interpreters (树遍历解释器)</h3>
+<p><em>Tree-walk interpreters 将代码解析为 AST, 运行程序时, 解释器每次都会遍历语法树的一个分支和叶子, 并在计算每个节点.</em></p>
+<h3 id="1-2-3-Transpiler-转译器">1.2.3 Transpiler (转译器)</h3>
+<div class="note note-info">
             <p>不理解, 待补</p>
           </div>
-
-<h3 id="1-2-4-Just-in-time-compilation-即时编译"><a href="#1-2-4-Just-in-time-compilation-即时编译" class="headerlink" title="1.2.4 Just-in-time compilation (即时编译)"></a>1.2.4 Just-in-time compilation (即时编译)</h3><div class="note note-info">
+<h3 id="1-2-4-Just-in-time-compilation-即时编译">1.2.4 Just-in-time compilation (即时编译)</h3>
+<div class="note note-info">
             <p>不理解, 待补</p>
           </div>
-
-<h2 id="1-3-Compilers-and-Interpreters-编译器和解释器"><a href="#1-3-Compilers-and-Interpreters-编译器和解释器" class="headerlink" title="1.3 Compilers and Interpreters (编译器和解释器)"></a>1.3 Compilers and Interpreters (编译器和解释器)</h2><ul>
-<li>Compilers: 将源语言翻译成其他语言, 但不会执行, 用户必须自己运行. 典型代表是 GCC, Clang, 它们是 C 编译器.<ul>
+<h2 id="1-3-Compilers-and-Interpreters-编译器和解释器">1.3 Compilers and Interpreters (编译器和解释器)</h2>
+<ul>
+<li>Compilers: 将源语言翻译成其他语言, 但不会执行, 用户必须自己运行. 典型代表是 GCC, Clang, 它们是 C 编译器.
+<ul>
 <li>较低级形式的语言: 字节码, 机器码</li>
 <li>另一种高级语言</li>
 </ul>
@@ -435,7 +448,6 @@
 <li>Interpreters: 接受源代码并立即执行. 如 Ruby.</li>
 </ul>
 <div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303144709671.png" srcset="/img/loading.gif" lazyload alt="image-20240303144709671" style="zoom:50%;" /></div>
-
 <p>对于 CPython, 其看起来是 Interpreters, 但是其内部实现还有有一些 Compile 的工作. 大多洒脚本语言都是这种工作方式.</p>
 
                 
