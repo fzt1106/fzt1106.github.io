@@ -30,6 +30,8 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>Educational Codeforces Round 162 (Rated for Div. 2) - Hexo</title>
 
@@ -40,6 +42,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -69,7 +73,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -82,7 +86,9 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -225,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.2k 字
         
       </span>
     
@@ -236,12 +242,20 @@
         
         
         
-          11 分钟
+          10 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -376,6 +390,14 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">Educational Codeforces Round 162 (Rated for Div. 2)</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年3月7日
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
@@ -395,7 +417,54 @@
 <p>找到第一个1与最后一个1之间有多少个0即可。</p>
 <p>如1001111，每次将最左边的1与最近的0交换，最小交换的次数等于0的个数，两次之后就会变成1111100</p>
 <h3 id="Code">Code</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">100</span>;<br><span class="hljs-type">int</span> n;<br><span class="hljs-type">int</span> a[N];<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        cin &gt;&gt; a[i];<br>    &#125;<br>    <span class="hljs-type">int</span> f = <span class="hljs-number">1</span>, s = n;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == <span class="hljs-number">1</span>) &#123;<br>            f = i;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n;i &gt;= <span class="hljs-number">1</span>;i--) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == <span class="hljs-number">1</span>) &#123;<br>            s = i;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (f == n || f == s) &#123;<br>        cout &lt;&lt; <span class="hljs-number">0</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">// cout &lt;&lt; f &lt;&lt; &#x27; &#x27; &lt;&lt; s &lt;&lt; endl;</span><br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = f;i &lt;= s;i++) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] == <span class="hljs-number">0</span>) &#123;<br>            ans++;<br>        &#125;<br>    &#125;<br>    cout &lt;&lt; ans &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-type">int</span> t;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int N = 100;
+int n;
+int a[N];
+
+
+void solve() {
+    cin &gt;&gt; n;
+    for (int i = 1;i &lt;= n;i++) {
+        cin &gt;&gt; a[i];
+    }
+    int f = 1, s = n;
+    for (int i = 1;i &lt;= n;i++) {
+        if (a[i] == 1) {
+            f = i;
+            break;
+        }
+    }
+    for (int i = n;i &gt;= 1;i--) {
+        if (a[i] == 1) {
+            s = i;
+            break;
+        }
+    }
+    if (f == n || f == s) {
+        cout &lt;&lt; 0 &lt;&lt; endl;
+        return;
+    }
+    // cout &lt;&lt; f &lt;&lt; ' ' &lt;&lt; s &lt;&lt; endl;
+    int ans = 0;
+    for (int i = f;i &lt;= s;i++) {
+        if (a[i] == 0) {
+            ans++;
+        }
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+}
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int t;
+    cin &gt;&gt; t;
+    while (t--) {
+        solve();
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="B-Monsters-Attack">B. Monsters Attack!</h2>
 <h3 id="Tags-2">Tags</h3>
 <ul>
@@ -405,7 +474,58 @@
 <h3 id="Idea-2">Idea</h3>
 <p>贪心打最近的敌人，同时，不用管左边正负，距离相同的敌人是等价的。贪心从最近的敌人打起，维护敌人已经走的步数step以及剩余的子弹，若step大于敌人的距离，那么输出“NO”</p>
 <h3 id="Code-2">Code</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3e5</span> + <span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> n, k;<br><span class="hljs-type">int</span> a[N], x[N];<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; k;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        cin &gt;&gt; a[i];<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        cin &gt;&gt; x[i];<br>    &#125;<br>    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">v</span>(n + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        v[<span class="hljs-built_in">abs</span>(x[i])] += a[i];<br>    &#125;<br>    <span class="hljs-comment">// for (int i = 1;i &lt;= n;i++)cout &lt;&lt; v[i] &lt;&lt; &#x27; &#x27;;</span><br>    <span class="hljs-comment">// cout &lt;&lt; endl;</span><br>    <span class="hljs-type">int</span> step = <span class="hljs-number">0</span>, left = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        <span class="hljs-keyword">if</span> (v[i]) &#123;<br>            <span class="hljs-keyword">if</span> (v[i] &lt;= left) &#123;<br>                left -= v[i];<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                v[i] -= left;<br>                <span class="hljs-type">int</span> temp = (v[i] + k - <span class="hljs-number">1</span>) / k;<br>                left = temp * k - v[i];<br>                step += temp;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (step &gt; i) &#123;<br>                cout &lt;&lt; <span class="hljs-string">&quot;NO&quot;</span> &lt;&lt; endl;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&quot;YES&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-type">int</span> t;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+const int N = 3e5 + 5;
+int n, k;
+int a[N], x[N];
+
+
+void solve() {
+    cin &gt;&gt; n &gt;&gt; k;
+    for (int i = 1;i &lt;= n;i++) {
+        cin &gt;&gt; a[i];
+    }
+    for (int i = 1;i &lt;= n;i++) {
+        cin &gt;&gt; x[i];
+    }
+    vector&lt;int&gt;v(n + 1);
+    for (int i = 1;i &lt;= n;i++) {
+        v[abs(x[i])] += a[i];
+    }
+    // for (int i = 1;i &lt;= n;i++)cout &lt;&lt; v[i] &lt;&lt; ' ';
+    // cout &lt;&lt; endl;
+    int step = 0, left = 0;
+    for (int i = 1;i &lt;= n;i++) {
+        if (v[i]) {
+            if (v[i] &lt;= left) {
+                left -= v[i];
+            }
+            else {
+                v[i] -= left;
+                int temp = (v[i] + k - 1) / k;
+                left = temp * k - v[i];
+                step += temp;
+            }
+            if (step &gt; i) {
+                cout &lt;&lt; "NO" &lt;&lt; endl;
+                return;
+            }
+        }
+    }
+    cout &lt;&lt; "YES" &lt;&lt; endl;
+}
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int t;
+    cin &gt;&gt; t;
+    while (t--) {
+        solve();
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="C-Find-B"><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1923/problem/C">C. Find B</a></h2>
 <h3 id="Tags-3">Tags</h3>
 <ul>
@@ -415,7 +535,51 @@
 <h3 id="Idea-3">Idea</h3>
 <p>对于长度为len，和为sum数组A，构造数组B。由于构造的数组每个元素必须大于0，那么可以先将数组B每个元素先置为1。对于A数组中非1的元素，B数组保持1不变；对于A数组中为1的元素，B数组中对应的1需要至少加1。若A数组中有x个1，那么需要sum-len&gt;=x。</p>
 <h3 id="Code-3">Code</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3e5</span> + <span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> n, q;<br><span class="hljs-type">int</span> c[N];<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n &gt;&gt; q;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++)cin &gt;&gt; c[i];<br>    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">x</span>(n + <span class="hljs-number">1</span>), <span class="hljs-built_in">y</span>(n + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        x[i] = c[i] + x[i - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span> (c[i] == <span class="hljs-number">1</span>)y[i] = y[i - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> y[i] = y[i - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-keyword">while</span> (q--) &#123;<br>        <span class="hljs-type">int</span> l, r;<br>        cin &gt;&gt; l &gt;&gt; r;<br>        <span class="hljs-type">int</span> len = r - l + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span> (len == <span class="hljs-number">1</span>) &#123;<br>            cout &lt;&lt; <span class="hljs-string">&quot;NO&quot;</span> &lt;&lt; endl;<br>            <span class="hljs-keyword">continue</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> sum = x[r] - x[l - <span class="hljs-number">1</span>];<br>        <span class="hljs-type">int</span> num = y[r] - y[l - <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span> (sum - len &gt;= num) &#123;<br>            cout &lt;&lt; <span class="hljs-string">&quot;YES&quot;</span> &lt;&lt; endl;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            cout &lt;&lt; <span class="hljs-string">&quot;NO&quot;</span> &lt;&lt; endl;<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-type">int</span> t;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+const int N = 3e5 + 5;
+int n, q;
+int c[N];
+
+
+void solve() {
+    cin &gt;&gt; n &gt;&gt; q;
+    for (int i = 1;i &lt;= n;i++)cin &gt;&gt; c[i];
+    vector&lt;int&gt;x(n + 1), y(n + 1);
+    for (int i = 1;i &lt;= n;i++) {
+        x[i] = c[i] + x[i - 1];
+        if (c[i] == 1)y[i] = y[i - 1] + 1;
+        else y[i] = y[i - 1];
+    }
+    while (q--) {
+        int l, r;
+        cin &gt;&gt; l &gt;&gt; r;
+        int len = r - l + 1;
+        if (len == 1) {
+            cout &lt;&lt; "NO" &lt;&lt; endl;
+            continue;
+        }
+        int sum = x[r] - x[l - 1];
+        int num = y[r] - y[l - 1];
+        if (sum - len &gt;= num) {
+            cout &lt;&lt; "YES" &lt;&lt; endl;
+        }
+        else {
+            cout &lt;&lt; "NO" &lt;&lt; endl;
+        }
+    }
+}
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int t;
+    cin &gt;&gt; t;
+    while (t--) {
+        solve();
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="D-Slimes"><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1923/problem/D">D. Slimes</a></h2>
 <h3 id="Tags-4">Tags</h3>
 <ul>
@@ -427,7 +591,89 @@
 <p>于是，对于<code>a[i]</code>每个数，维护其左边前缀和以及右边后缀和，二分查找左边/右边第一个前缀和/后缀和大于<code>a[i]</code>的端点即可。但是需要判断该子串是否元素不全相同。若全相同，则需另外找该端点左侧/右侧第一个不同的元素的位置。</p>
 <p>判断某子串元素是否全相同，可以维护每个元素左边/右边第一个不同的元素的位置。</p>
 <h3 id="Code-4">Code</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3e5</span> + <span class="hljs-number">5</span>;<br><span class="hljs-type">int</span> n;<br><span class="hljs-type">int</span> a[N];<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span> </span>&#123;<br>    cin &gt;&gt; n;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++)cin &gt;&gt; a[i];<br>    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">l</span>(n + <span class="hljs-number">10</span>), <span class="hljs-built_in">r</span>(n + <span class="hljs-number">10</span>);<br>    a[<span class="hljs-number">0</span>] = a[n + <span class="hljs-number">1</span>] = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] != a[i - <span class="hljs-number">1</span>])l[i] = i - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> l[i] = l[i - <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = n;i &gt;= <span class="hljs-number">1</span>;i--) &#123;<br>        <span class="hljs-keyword">if</span> (a[i] != a[i + <span class="hljs-number">1</span>])r[i] = i + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> r[i] = r[i + <span class="hljs-number">1</span>];<br>    &#125;<br>    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">sum</span>(n + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++)sum[i] = sum[i - <span class="hljs-number">1</span>] + a[i];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i &lt;= n;i++) &#123;<br>        <span class="hljs-type">int</span> res = <span class="hljs-number">1e18</span>;<br>        <span class="hljs-comment">// 左边</span><br>        <span class="hljs-keyword">if</span> (sum[i - <span class="hljs-number">1</span>] &gt; a[i]) &#123;<br>            <span class="hljs-type">int</span> x = <span class="hljs-number">1</span>, y = i - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span> (x &lt; y) &#123;<br>                <span class="hljs-type">int</span> mid = (x + y + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>                <span class="hljs-keyword">if</span> (sum[i - <span class="hljs-number">1</span>] - sum[mid - <span class="hljs-number">1</span>] &gt; a[i]) &#123;<br>                    x = mid;<br>                &#125;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    y = mid - <span class="hljs-number">1</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (i - x == <span class="hljs-number">1</span>) &#123;<br>                res = <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (r[x] &lt;= i - <span class="hljs-number">1</span>) &#123;<br>                res = <span class="hljs-built_in">min</span>(res, i - x);<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (l[x] != <span class="hljs-number">0</span>) &#123;<br>                    res = <span class="hljs-built_in">min</span>(res, i - l[x]);<br>                &#125;<br>            &#125;<br><br>        &#125;<br>        <span class="hljs-comment">// 右边</span><br>        <span class="hljs-keyword">if</span> (sum[n] - sum[i] &gt; a[i]) &#123;<br>            <span class="hljs-type">int</span> x = i + <span class="hljs-number">1</span>, y = n;<br>            <span class="hljs-keyword">while</span> (x &lt; y) &#123;<br>                <span class="hljs-type">int</span> mid = (x + y) / <span class="hljs-number">2</span>;<br>                <span class="hljs-keyword">if</span> (sum[mid] - sum[i] &gt; a[i])y = mid;<br>                <span class="hljs-keyword">else</span> x = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (y - i == <span class="hljs-number">1</span>)res = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (l[y] &gt;= i + <span class="hljs-number">1</span>) &#123;<br>                res = <span class="hljs-built_in">min</span>(res, y - i);<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (r[y] != n + <span class="hljs-number">1</span>) &#123;<br>                    res = <span class="hljs-built_in">min</span>(res, r[y] - i);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (res == <span class="hljs-number">1e18</span>)cout &lt;&lt; <span class="hljs-number">-1</span> &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>;<br>        <span class="hljs-keyword">else</span> cout &lt;&lt; res &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>;<br>    &#125;<br>    cout &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-type">int</span> t;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+#define int long long
+using namespace std;
+
+const int N = 3e5 + 5;
+int n;
+int a[N];
+
+
+void solve() {
+    cin &gt;&gt; n;
+    for (int i = 1;i &lt;= n;i++)cin &gt;&gt; a[i];
+    vector&lt;int&gt;l(n + 10), r(n + 10);
+    a[0] = a[n + 1] = -1;
+    for (int i = 1;i &lt;= n;i++) {
+        if (a[i] != a[i - 1])l[i] = i - 1;
+        else l[i] = l[i - 1];
+    }
+    for (int i = n;i &gt;= 1;i--) {
+        if (a[i] != a[i + 1])r[i] = i + 1;
+        else r[i] = r[i + 1];
+    }
+    vector&lt;int&gt;sum(n + 1);
+    for (int i = 1;i &lt;= n;i++)sum[i] = sum[i - 1] + a[i];
+    for (int i = 1;i &lt;= n;i++) {
+        int res = 1e18;
+        // 左边
+        if (sum[i - 1] &gt; a[i]) {
+            int x = 1, y = i - 1;
+            while (x &lt; y) {
+                int mid = (x + y + 1) / 2;
+                if (sum[i - 1] - sum[mid - 1] &gt; a[i]) {
+                    x = mid;
+                }
+                else {
+                    y = mid - 1;
+                }
+            }
+            if (i - x == 1) {
+                res = 1;
+            }
+            else if (r[x] &lt;= i - 1) {
+                res = min(res, i - x);
+            }
+            else {
+                if (l[x] != 0) {
+                    res = min(res, i - l[x]);
+                }
+            }
+
+        }
+        // 右边
+        if (sum[n] - sum[i] &gt; a[i]) {
+            int x = i + 1, y = n;
+            while (x &lt; y) {
+                int mid = (x + y) / 2;
+                if (sum[mid] - sum[i] &gt; a[i])y = mid;
+                else x = mid + 1;
+            }
+            if (y - i == 1)res = 1;
+            if (l[y] &gt;= i + 1) {
+                res = min(res, y - i);
+            }
+            else {
+                if (r[y] != n + 1) {
+                    res = min(res, r[y] - i);
+                }
+            }
+        }
+        if (res == 1e18)cout &lt;&lt; -1 &lt;&lt; ' ';
+        else cout &lt;&lt; res &lt;&lt; ' ';
+    }
+    cout &lt;&lt; endl;
+}
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int t;
+    cin &gt;&gt; t;
+    while (t--) {
+        solve();
+    }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 
                 
               </div>
@@ -721,6 +967,8 @@
 </script>
 
 
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
@@ -818,6 +1066,8 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

@@ -37,6 +37,8 @@
 <meta name="twitter:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>第 1 章 A Map of the Territory - Hexo</title>
 
@@ -47,6 +49,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -76,7 +80,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -89,7 +93,9 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -250,6 +256,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
 
@@ -383,12 +397,20 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">第 1 章 A Map of the Territory</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年3月5日
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
                 <h1>第 1 章 A Map of the Territory</h1>
 <h2 id="1-1-语言各部分">1.1 语言各部分</h2>
-<div style="text-align center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png" srcset="/img/loading.gif" lazyload alt="image-20240303114655871" style="zoom: 80%;" /></div>
+<div style="text-align center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303114655871.png" srcset="/img/loading.gif" lazyload alt="image-20240303114655871" style="zoom: 80%;"></div>
 <h3 id="1-1-1-Scanning-扫描-词法分析">1.1.1 Scanning (扫描|词法分析)</h3>
 <p><code>Scanning (扫描) </code>等同于 <code>lexing (词法分析)</code>, <code>Scanner (or lexer)</code> 的作用是: 接受线性字符流，并将它们切分成类似于“单词”的多个小单元，这些单元称为 <code>token (词法单元) </code>.</p>
 <p>词法单元可以是一个字符 <code>(</code>, 也可以是数字 <code>123</code>, 字符串 <code>hi</code>, 标识符 <code>cin</code></p>
@@ -397,7 +419,7 @@
 <p><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228105133238.png" srcset="/img/loading.gif" lazyload alt="image-20240228105133238"></p>
 <h3 id="1-1-2-Parsing-解析-语法分析">1.1.2 Parsing (解析|语法分析)</h3>
 <p><code>Parsing (解析) </code>即<code>语法分析</code>, <code>parser (解析器) </code>作用是：将<strong>词法单元序列转化为树形结构</strong>。因为树形结构能很好的反映语法的嵌套结构. 这些树称为 <code>parse tree, abstract syntax tree</code>. 同时，解析器的作用还包括检测 <code>syntax errors (语法错误)</code>.</p>
-<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228102912591.png" srcset="/img/loading.gif" lazyload alt="image-20240228102912591" /></div>
+<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240228102912591.png" srcset="/img/loading.gif" lazyload alt="image-20240228102912591"></div>
 <h3 id="1-1-3-Static-analysis-静态分析">1.1.3 Static analysis (静态分析)</h3>
 <p>静态分析的任务是: <code>bingding (绑定) or resolution (决议) </code>, 即对于每一个标识符，找出定义该名字的地方，并将二者联系起来。</p>
 <p>要实现绑定，所有语义的信息都需要存储在某个地方，有以下地方可供选择：</p>
@@ -447,7 +469,7 @@
 </li>
 <li>Interpreters: 接受源代码并立即执行. 如 Ruby.</li>
 </ul>
-<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303144709671.png" srcset="/img/loading.gif" lazyload alt="image-20240303144709671" style="zoom:50%;" /></div>
+<div style="text-align: center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240303144709671.png" srcset="/img/loading.gif" lazyload alt="image-20240303144709671" style="zoom:50%;"></div>
 <p>对于 CPython, 其看起来是 Interpreters, 但是其内部实现还有有一些 Compile 的工作. 大多洒脚本语言都是这种工作方式.</p>
 
                 
@@ -744,6 +766,8 @@
 </script>
 
 
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
@@ -841,6 +865,8 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

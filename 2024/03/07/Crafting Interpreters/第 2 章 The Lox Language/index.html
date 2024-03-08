@@ -31,6 +31,8 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>第 2 章 The Lox Language - Hexo</title>
 
@@ -41,6 +43,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -70,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -83,7 +87,9 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -226,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.3k 字
         
       </span>
     
@@ -237,12 +243,20 @@
         
         
         
-          13 分钟
+          12 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -377,12 +391,20 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">第 2 章 The Lox Language</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年3月5日
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
                 <h1>第 2 章 The Lox Language</h1>
 <h2 id="2-1-Hello-Lox">2.1 Hello, Lox</h2>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">print <span class="hljs-string">&quot;Hello, world!&quot;</span>;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">print <span class="token string">"Hello, world!"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
 <p>lox 语言是 C 语言的家族成员之一</p>
 <h2 id="2-2-A-High-Level-Language">2.2 A High-Level Language</h2>
 <p>与 Lox 有共同之处的三个语言:</p>
@@ -417,28 +439,43 @@
 </ul>
 <h2 id="2-5-Statement-语句">2.5 Statement (语句)</h2>
 <p>表达式主要作用是产生一个值, 而语句的作用是产生一个效果 (修改某些状态, 输入, 输出).</p>
-<p>表达式后面跟分号 <code>;</code> 可以将表达式提升为语句, 称为 <code>expression statement</code>. 同时, 可以将一系列语句通过 <code>&#123;&#125;</code> 打包在一个块中, 并且块也会影响作用域.</p>
+<p>表达式后面跟分号 <code>;</code> 可以将表达式提升为语句, 称为 <code>expression statement</code>. 同时, 可以将一系列语句通过 <code>{}</code> 打包在一个块中, 并且块也会影响作用域.</p>
 <h2 id="3-6-Variables-变量">3.6 Variables (变量)</h2>
 <p>可以通过 <code>var</code> 来声明一个变量, 若未进行初始化, 那么变量的值是 <code>nil</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">var breakfast = <span class="hljs-string">&quot;bagels&quot;</span>;<br>print breakfast; <span class="hljs-comment">// &quot;bagels&quot;.</span><br>breakfast = <span class="hljs-string">&quot;beignets&quot;</span>;<br>print breakfast; <span class="hljs-comment">// &quot;beignets&quot;.</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">var breakfast <span class="token operator">=</span> <span class="token string">"bagels"</span><span class="token punctuation">;</span>
+print breakfast<span class="token punctuation">;</span> <span class="token comment">// "bagels".</span>
+breakfast <span class="token operator">=</span> <span class="token string">"beignets"</span><span class="token punctuation">;</span>
+print breakfast<span class="token punctuation">;</span> <span class="token comment">// "beignets".</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="3-7-Control-Flow-控制流">3.7 Control Flow (控制流)</h2>
 <ul>
 <li><code>if</code></li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">if</span> (condition) &#123;<br>  print <span class="hljs-string">&quot;yes&quot;</span>;<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>  print <span class="hljs-string">&quot;no&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  print <span class="token string">"yes"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  print <span class="token string">"no"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <ul>
 <li><code>while</code></li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">var a = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (a &lt; <span class="hljs-number">10</span>) &#123;<br>  print a;<br>  a = a + <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">var a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>a <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  print a<span class="token punctuation">;</span>
+  a <span class="token operator">=</span> a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <ul>
 <li><code>for</code></li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">for</span> (var a = <span class="hljs-number">1</span>; a &lt; <span class="hljs-number">10</span>; a = a + <span class="hljs-number">1</span>) &#123;<br>  print a;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>var a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> a <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> a <span class="token operator">=</span> a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  print a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="3-8-Functions-函数">3.8 Functions (函数)</h2>
 <p>可以通过 <code>fun</code> 来声明一个函数, 并通过 <code>return</code> 返回一个值. 若无 <code>return</code> 则返回 <code>nil</code>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C">fun <span class="hljs-title function_">returnSum</span><span class="hljs-params">(a, b)</span> &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-C" data-language="C"><code class="language-C">fun returnSum(a, b) {
+  return a + b;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>函数调用与 C 语言中形式一样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">makeBreakfast(bacon, eggs, toast);<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">makeBreakfast</span><span class="token punctuation">(</span>bacon<span class="token punctuation">,</span> eggs<span class="token punctuation">,</span> toast<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
 <p>注意区分 <strong>argument, parameter</strong>:</p>
 <ul>
 <li>argument: <strong>实际参数</strong></li>
@@ -446,11 +483,36 @@
 </ul>
 <h2 id="3-9-Closures-闭包">3.9 Closures (闭包)</h2>
 <p>在 Lox 中, 函数是真实的值, 可以对这些值进行引用, 存储在变量中, 传递等.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">addPair</span><span class="hljs-params">(a, b)</span> &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br>fun <span class="hljs-title function_">identity</span><span class="hljs-params">(a)</span> &#123;<br>  <span class="hljs-keyword">return</span> a;<br>&#125;<br><br>print <span class="hljs-title function_">identity</span><span class="hljs-params">(addPair)</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span>; <span class="hljs-comment">// Prints &quot;3&quot;.</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">fun <span class="token function">addPair</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+fun <span class="token function">identity</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+print <span class="token function">identity</span><span class="token punctuation">(</span>addPair<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Prints "3".</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>由于函数是声明语句, 可以在另一个函数中声明局部函数.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">outerFunction</span><span class="hljs-params">()</span> &#123;<br>  fun <span class="hljs-title function_">localFunction</span><span class="hljs-params">()</span> &#123;<br>    print <span class="hljs-string">&quot;I&#x27;m local!&quot;</span>;<br>  &#125;<br><br>  localFunction();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">fun <span class="token function">outerFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  fun <span class="token function">localFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print <span class="token string">"I'm local!"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">localFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>若将局部函数, 头等函数, 块作用域组合在一起:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c">fun <span class="hljs-title function_">returnFunction</span><span class="hljs-params">()</span> &#123;<br>  var outside = <span class="hljs-string">&quot;outside&quot;</span>;<br><br>  fun <span class="hljs-title function_">inner</span><span class="hljs-params">()</span> &#123;<br>    print outside;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> inner;<br>&#125;<br><br>var fn = returnFunction();<br>fn();<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">fun <span class="token function">returnFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  var outside <span class="token operator">=</span> <span class="token string">"outside"</span><span class="token punctuation">;</span>
+
+  fun <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print outside<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> inner<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+var fn <span class="token operator">=</span> <span class="token function">returnFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>在上述代码中, <code>inner()</code> 访问了在其函数体外的外部函数中声明的局部变量. 为做到这一点, <code>inner()</code> 必须保留对它使用的任何周围变量的引用, 即使在外层函数返回之后, 这些变量仍然存在. 我们把能做到这一点的函数称为 <strong>closures (闭包)</strong>.</p>
 <h2 id="3-10-Classes-类">3.10 Classes (类)</h2>
 <h3 id="3-10-1-class-and-prototypes">3.10.1 class and prototypes</h3>
@@ -473,24 +535,65 @@
 <p>原型在语言中更简单, 但是, 它们似乎只是通过将复杂性推给用户来实现的. 对于 Lox 来说, 将省去用户的麻烦, 直接把类包含进去.</p>
 <h3 id="3-10-2-Lox-中的类">3.10.2 Lox 中的类</h3>
 <p>声明一个类及其方法:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  cook() &#123;<br>    print <span class="hljs-string">&quot;Eggs a-fryin&#x27;!&quot;</span>;<br>  &#125;<br><br>  serve(who) &#123;<br>    print <span class="hljs-string">&quot;Enjoy your breakfast, &quot;</span> + who + <span class="hljs-string">&quot;.&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">class Breakfast <span class="token punctuation">{</span>
+  <span class="token function">cook</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print <span class="token string">"Eggs a-fryin'!"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">serve</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print <span class="token string">"Enjoy your breakfast, "</span> <span class="token operator">+</span> who <span class="token operator">+</span> <span class="token string">"."</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>类声明生效时, Lox 将创建一个对象, 并将其存储在以该类命名的变量中.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// Store it in variables.</span><br>var someVariable = Breakfast;<br><br><span class="hljs-comment">// Pass it to functions.</span><br>someFunction(Breakfast);<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// Store it in variables.</span>
+var someVariable <span class="token operator">=</span> Breakfast<span class="token punctuation">;</span>
+
+<span class="token comment">// Pass it to functions.</span>
+<span class="token function">someFunction</span><span class="token punctuation">(</span>Breakfast<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>创建类的实例, 可以使用类似于调用函数的方法:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">var breakfast = Breakfast();<br>print breakfast; <span class="hljs-comment">// &quot;Breakfast instance&quot;.</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">var breakfast <span class="token operator">=</span> <span class="token function">Breakfast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+print breakfast<span class="token punctuation">;</span> <span class="token comment">// "Breakfast instance".</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <h3 id="3-10-3-Instantiation-and-initialization-实例和初始化">3.10.3 Instantiation and initialization (实例和初始化)</h3>
 <p>类中不仅有方法, 还有状态. Lox 允许自由地向对象中添加状态. 若起初没有该字段, 那么对它进行赋值时会先创建.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">breakfast.meat = <span class="hljs-string">&quot;sausage&quot;</span>;<br>breakfast.bread = <span class="hljs-string">&quot;sourdough&quot;</span>;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">breakfast<span class="token punctuation">.</span>meat <span class="token operator">=</span> <span class="token string">"sausage"</span><span class="token punctuation">;</span>
+breakfast<span class="token punctuation">.</span>bread <span class="token operator">=</span> <span class="token string">"sourdough"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>若想从方法内部访问当前对象上的字段或方法, 可以使用 <code>this</code>:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  serve(who) &#123;<br>    print <span class="hljs-string">&quot;Enjoy your &quot;</span> + this.meat + <span class="hljs-string">&quot; and &quot;</span> +<br>        this.bread + <span class="hljs-string">&quot;, &quot;</span> + who + <span class="hljs-string">&quot;.&quot;</span>;<br>  &#125;<br><br>  <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">class Breakfast <span class="token punctuation">{</span>
+  <span class="token function">serve</span><span class="token punctuation">(</span>who<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print <span class="token string">"Enjoy your "</span> <span class="token operator">+</span> this<span class="token punctuation">.</span>meat <span class="token operator">+</span> <span class="token string">" and "</span> <span class="token operator">+</span>
+        this<span class="token punctuation">.</span>bread <span class="token operator">+</span> <span class="token string">", "</span> <span class="token operator">+</span> who <span class="token operator">+</span> <span class="token string">"."</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>在对象中封装数据的目的之一是确保对象在创建时处于有效状态, 可以定义一个初始化器 <code>init()</code>, 在构造对象时会自动调用该方法.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Breakfast</span> &#123;</span><br>  init(meat, bread) &#123;<br>    this.meat = meat;<br>    this.bread = bread;<br>  &#125;<br><br>  <span class="hljs-comment">// ...</span><br>&#125;<br><br>var baconAndToast = Breakfast(<span class="hljs-string">&quot;bacon&quot;</span>, <span class="hljs-string">&quot;toast&quot;</span>);<br>baconAndToast.serve(<span class="hljs-string">&quot;Dear Reader&quot;</span>);<br><span class="hljs-comment">// &quot;Enjoy your bacon and toast, Dear Reader.&quot;</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">class Breakfast <span class="token punctuation">{</span>
+  <span class="token function">init</span><span class="token punctuation">(</span>meat<span class="token punctuation">,</span> bread<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>meat <span class="token operator">=</span> meat<span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>bread <span class="token operator">=</span> bread<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+var baconAndToast <span class="token operator">=</span> <span class="token function">Breakfast</span><span class="token punctuation">(</span><span class="token string">"bacon"</span><span class="token punctuation">,</span> <span class="token string">"toast"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+baconAndToast<span class="token punctuation">.</span><span class="token function">serve</span><span class="token punctuation">(</span><span class="token string">"Dear Reader"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// "Enjoy your bacon and toast, Dear Reader."</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h3 id="3-10-4-Inheritance-继承">3.10.4 Inheritance (继承)</h3>
 <p>使用 <code>&lt;</code> 来实现继承:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Brunch</span> &lt;</span> Breakfast &#123;<br>  drink() &#123;<br>    print <span class="hljs-string">&quot;How about a Bloody Mary?&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">class Brunch <span class="token operator">&lt;</span> Breakfast <span class="token punctuation">{</span>
+  <span class="token function">drink</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    print <span class="token string">"How about a Bloody Mary?"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>Brunch 是 <strong>derived class (派生类) or subclass 子类)</strong>, Breakfast 是 <strong>base class (基类) or superclass (超类)</strong>.</p>
 <p>父类中定义的方法都会被子类继承, <code>init()</code> 同样会被继承. 但是为了确保父类维护其状态, 又不通过调用原始的初始化方法, 可以使用 <code>super</code>.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Brunch</span> &lt;</span> Breakfast &#123;<br>  init(meat, bread, drink) &#123;<br>    super.init(meat, bread);<br>    this.drink = drink;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">class Brunch <span class="token operator">&lt;</span> Breakfast <span class="token punctuation">{</span>
+  <span class="token function">init</span><span class="token punctuation">(</span>meat<span class="token punctuation">,</span> bread<span class="token punctuation">,</span> drink<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    super<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>meat<span class="token punctuation">,</span> bread<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>drink <span class="token operator">=</span> drink<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h2 id="3-11-The-Standary-Library-标准库">3.11 The Standary Library (标准库)</h2>
 <p>一组直接在解释器中实现的功能集, 所有用户定义的行为都是建立在此基础上.</p>
 
@@ -788,6 +891,8 @@
 </script>
 
 
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
@@ -885,6 +990,8 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

@@ -34,6 +34,8 @@
 <meta name="twitter:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304183244183.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>第 4 章 表达式 - Hexo</title>
 
@@ -44,6 +46,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -73,7 +77,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -86,7 +90,9 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -247,6 +253,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
 
@@ -371,6 +385,14 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">第 4 章 表达式</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年3月6日
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
@@ -411,7 +433,7 @@
 <li>逗号运算符: <code>,</code></li>
 </ol>
 <p>对于那些未规定执行顺序的运算符, <u> 如果表达式指向并修改了同一对象, 将会引发错误并产生未定义的行为 </u>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> x=<span class="hljs-built_in">f</span>()+<span class="hljs-built_in">g</span>()*<span class="hljs-built_in">h</span>()+<span class="hljs-built_in">j</span>()<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int x=f()+g()*h()+j()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
 <p>如上述表达式:</p>
 <ul>
 <li>优先级规定: <code>g()</code> 的返回值与 <code>h()</code> 的返回值相乘</li>
@@ -430,17 +452,18 @@
 </ul>
 </blockquote>
 <h2 id="4-2-算术运算符">4.2 算术运算符</h2>
-<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304183244183.png" srcset="/img/loading.gif" lazyload alt="算术运算符" /> </div>
+<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304183244183.png" srcset="/img/loading.gif" lazyload alt="算术运算符"> </div>
 <p>算术运算符优先级如上所示, 遵循 <strong>左结合律</strong>, 运算对象和求值结果都是 <strong>右值</strong>.</p>
 <ul>
 <li><em>一元正号运算符, 加法运算符, 减法运算符都能作用于指针.</em></li>
 <li>一元正号运算符作用于指针或者算术值时, 返回运算对象值的一个 (提升后的) 副本.</li>
 <li>一元负号运算符对运算对象值取负后, 返回运算对象值的一个 (提升后的) 副本.</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">bool</span> b=<span class="hljs-literal">true</span>; <span class="hljs-comment">// b 为bool类型</span><br>cout &lt;&lt; <span class="hljs-built_in">typeid</span>(-b).<span class="hljs-built_in">name</span>() &lt;&lt; endl; <span class="hljs-comment">// -b 的类型实际上为 int 类型, 表示 -1</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">bool b=true; // b 为bool类型
+cout &lt;&lt; typeid(-b).name() &lt;&lt; endl; // -b 的类型实际上为 int 类型, 表示 -1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>对于 <code>/</code>, 整数的运算结果还是整数, 同时 <strong>向 0 取整</strong>. 对于 <code>%</code> 运算, 运算结果的 <strong>正负取决于分子的符号, 与分母符号无关</strong>.即有: $(-m)/n = m/(-n)= -(m/n), (-m)%n=-(m%n), m%(-n)=m%n$</p>
 <h2 id="4-3-逻辑和关系运算符">4.3 逻辑和关系运算符</h2>
-<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304192050379.png" srcset="/img/loading.gif" lazyload alt="image-20240304192050379" /> </div>
+<div style="text-align: center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240304192050379.png" srcset="/img/loading.gif" lazyload alt="image-20240304192050379"> </div>
 <p>逻辑运算符和关系运算符返回值都是布尔类型, 其中 <strong>关系运算符满足左结合律</strong>, 运算结果都是 <strong>右值</strong>.</p>
 <p>逻辑与和逻辑或运算符具有 <strong>短路求值</strong> 的特点:</p>
 <ul>
@@ -449,22 +472,27 @@
 </ul>
 <blockquote>
 <p>进行比较运算时, 除非比较的对象为 bool 型, 否则不要用布尔字面值 true and false 作为比较对象.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (val == <span class="hljs-literal">true</span>)...;<br><span class="hljs-comment">// 当 val 为 bool 类型时, 比较运算不会有问题.</span><br><span class="hljs-comment">// 当 val 为 int 类型时, 会将 true 转换成 1, 表达式变为 if (val == 1), 比较运算与预期效果不符.</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">if (val == true)...;
+// 当 val 为 bool 类型时, 比较运算不会有问题.
+// 当 val 为 int 类型时, 会将 true 转换成 1, 表达式变为 if (val == 1), 比较运算与预期效果不符.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 </blockquote>
 <h2 id="4-4-赋值运算符">4.4 赋值运算符</h2>
 <p>赋值运算符 <strong>左侧运算对象必须是左值, 结果类型是左侧运算对象的类型</strong>.</p>
 <p>可以使用初始值列表作为赋值运算符右侧运算对象, 若左侧运算对象是内置类型, 那么初始值列表最多只能包含一个值, <strong>小心类型转换过程中是否有信息损失的风险</strong>: 该值所占空间也不应该大于目标类型空间.</p>
 <p>无论左侧运算对象的类型是什么, 初始值列表都可以为空, 此时, 编译器创建一个 <strong>值初始化</strong> 的临时量赋值给左侧.</p>
 <h3 id="赋值运算符满足右结合律">赋值运算符满足右结合律</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i,j;<br>i=j=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int i,j;
+i=j=0;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>首先执行 <code>j=0</code>, 返回左侧运算对象即 <code>j</code>, 在执行 <code>i=j</code>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> i, *j;<br>i=j=<span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int i, *j;
+i=j=0;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>即便 0 可以为指针与整型赋值, 但是 , 指针不能赋值给 <code>int</code> 类型, 因此上述是错误的. <u> 多重赋值语句中每一个对象, 它的对象与右侧对象相同或可以由其转换而来 </u>.</p>
 <blockquote>
 <p>谨慎赋值运算符在条件判断过程中的使用, 赋值运算符的优先级较低.</p>
 </blockquote>
 <h3 id="复合赋值运算符">复合赋值运算符</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">+=, -=, *=, /=, %=;			<span class="hljs-comment">// 算术运算符</span><br>&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, |=;		<span class="hljs-comment">// 位运算符</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">+=, -=, *=, /=, %=;			// 算术运算符
+&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, |=;		// 位运算符<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>等价于 <code>a = a op b;</code></p>
 <h2 id="4-5-递增和递减运算符">4.5 递增和递减运算符</h2>
 <p>递增递减运算符必须作用于 <strong>左值</strong> 运算对象. 前置版本将 <strong>对象本身作为左值返回</strong>, 后置版本将 <strong>对象原始值的副本作为右值返回</strong>.</p>
@@ -472,11 +500,16 @@
 <p><strong>除非必要, 否则不用递增递减运算符的后置版本</strong>: 因为后置版本需要保存元素对象的副本, 对于复杂的迭代器类型来说, 额外的工作量会增加很多.</p>
 </blockquote>
 <h3 id="在一条语句中混用解引用和递增运算符">在一条语句中混用解引用和递增运算符</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">auto</span> x=v.<span class="hljs-built_in">begin</span>();<br><span class="hljs-keyword">while</span>(x != v.<span class="hljs-built_in">end</span>() &amp;&amp; *x&gt;=<span class="hljs-number">0</span>)&#123;<br>    cout&lt;&lt; *x++ &lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">auto x=v.begin();
+while(x != v.end() &amp;&amp; *x&gt;=0){
+    cout&lt;&lt; *x++ &lt;&lt;endl;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>上述结果先执行 <code>x++</code>, <code>*</code> 作用于 <code>x</code> 原来指向的值. 效果是: <u> 输出 <code>x</code> 开始指向的哪个元素, 并将指针向前移动一个单位 </u>.</p>
 <h3 id="运算对象的求值顺序未规定">运算对象的求值顺序未规定</h3>
 <p><u> 注意递增递减运算符会改变运算对象, 这时需要关注运算对象的求值顺序, 是否会产生未定义的行为.</u></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(beg!=s.<span class="hljs-built_in">end</span>() &amp;&amp; !<span class="hljs-built_in">isspace</span>(*beg))&#123;<br>    *beg = <span class="hljs-built_in">toupper</span>(*beg++);	<span class="hljs-comment">// 错误: 该赋值语句未定义</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">while(beg!=s.end() &amp;&amp; !isspace(*beg)){
+    *beg = toupper(*beg++);	// 错误: 该赋值语句未定义
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>赋值运算符两端都使用了 beg, 并且左侧运算对象改变了 beg 的值, 所以上述赋值语句是未定义的.</p>
 <h2 id="4-6-成员访问运算符">4.6 成员访问运算符</h2>
 <p><code>ptr -&gt; men</code> 等价于 <code>(*ptr).mem</code>.</p>
@@ -498,14 +531,18 @@
 <p>只不过, 上述运算对象的组合方式是: <code>a ? b : (c ? d : e);</code></p>
 <h3 id="在输出表达式中使用条件运算符">在输出表达式中使用条件运算符</h3>
 <p>注意 <strong>条件运算符的优先级非常低, 低于 <code>&lt;&lt;</code></strong>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt; ((a&lt;<span class="hljs-number">100</span>)?f:t);	<span class="hljs-comment">// 输出 f or t</span><br>cout&lt;&lt; (a&lt;<span class="hljs-number">100</span>)?f:t;		<span class="hljs-comment">// 输出 a&lt;100 的结果</span><br>cout&lt;&lt; a&lt;<span class="hljs-number">100</span>?f:t;		<span class="hljs-comment">// 错误: 试图比较cout 与 100</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cout&lt;&lt; ((a&lt;100)?f:t);	// 输出 f or t
+cout&lt;&lt; (a&lt;100)?f:t;		// 输出 a&lt;100 的结果
+cout&lt;&lt; a&lt;100?f:t;		// 错误: 试图比较cout 与 100<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>第二条语句等价于:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt; (a&lt;<span class="hljs-number">100</span>);<br>cout ?f:t;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cout&lt;&lt; (a&lt;100);
+cout ?f:t;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>第三条语句等价于:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">cout&lt;&lt;a;<br>cout&lt;<span class="hljs-number">100</span>?f:t;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cout&lt;&lt;a;
+cout&lt;100?f:t;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <h2 id="4-8-位运算符">4.8 位运算符</h2>
 <p>位运算符作用于整数类型, bitset 类型. 其将运算对象看成二进制位的集合.</p>
-<div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240305114900117.png" srcset="/img/loading.gif" lazyload alt="位运算符" /> </div>
+<div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240305114900117.png" srcset="/img/loading.gif" lazyload alt="位运算符"> </div>
 <p>若运算对象是小整数类型, 那么它的值会被 <strong>提升</strong>. 同时, 运算对象可以是带符号类型 or 无符号类型, <strong>若处理带符号类型, 位运算符的处理方式依赖于机器</strong>. 并且, 由于左移操作可能会改变符号位, 因此是一种未定义的行为.</p>
 <ul>
 <li>左移运算符: 在右侧插入 0.</li>
@@ -538,7 +575,8 @@
 <li>对于 <code>string</code>  or <code>vector</code> 类型: <em>结果返回该类型固定部分的大小, 不会计算对象中的元素占用了多少空间</em>.</li>
 </ul>
 <p>可以利用 <code>sizeof</code> 来计算数组中元素的个数, 同时由于返回结果是常量表达式, 可以用 <code>sizeof</code> 的结果声明数组的维度.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a[<span class="hljs-number">10</span>];<br><span class="hljs-keyword">constexpr</span> <span class="hljs-type">size_t</span> sz=<span class="hljs-built_in">sizeof</span>(a)/<span class="hljs-built_in">sizeof</span>(*a);<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int a[10];
+constexpr size_t sz=sizeof(a)/sizeof(*a);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <h2 id="4-10-类型转换">4.10 类型转换</h2>
 <p>若两种类型可以 <strong>相互转换</strong>, 那么它们就是关联的.</p>
 <p><strong>隐式转换</strong>: 类型转换是自动进行的, 无须程序员的介入. 有以下几种情况会发生隐式类型转换:</p>
@@ -608,7 +646,8 @@
 <h4 id="reinterpret-cast">reinterpret_cast</h4>
 <p><em>reinterpret_cast 通常为运算对象的位模式提供较低层次上的重新解释.</em></p>
 <h4 id="旧强制类型转换">旧强制类型转换</h4>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-built_in">type</span> (expr); <span class="hljs-comment">// 函数形式的强制类型转换</span><br>(type) expr; <span class="hljs-comment">// C 语言风格的强制类型转换</span><br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">type (expr); // 函数形式的强制类型转换
+(type) expr; // C 语言风格的强制类型转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>旧强制类型转换分别具有与 const_cast, static_cast, reinterpret_cast 相似的行为, 似具体情况而定.</p>
 <ul>
 <li>若换成 const_cast 和 static_cast 也合法, 则其行为与对应的命名转换一致.</li>
@@ -907,6 +946,8 @@
 </script>
 
 
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
@@ -1004,6 +1045,8 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

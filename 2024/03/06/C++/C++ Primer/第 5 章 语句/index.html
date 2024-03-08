@@ -24,13 +24,16 @@
 <meta property="og:description" content="介绍了 C++ 中的条件语句, 循环语句, 跳转语句.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240306113745854.png">
+<meta property="og:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240307194612941.png">
 <meta property="article:published_time" content="2024-03-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-06T12:06:12.651Z">
+<meta property="article:modified_time" content="2024-03-07T11:46:54.230Z">
 <meta property="article:author" content="ZTFan">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240306113745854.png">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>第 5 章 语句 - Hexo</title>
@@ -42,6 +45,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -71,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"C++"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -84,7 +89,9 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 
 <body>
@@ -227,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          2.1k 字
         
       </span>
     
@@ -238,12 +245,20 @@
         
         
         
-          10 分钟
+          18 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -369,6 +384,14 @@
           <article class="post-content mx-auto">
             <h1 id="seo-header">第 5 章 语句</h1>
             
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年3月7日
+                  
+                
+              </p>
+            
             
               <div class="markdown-body">
                 
@@ -399,7 +422,15 @@
 <h2 id="5-2-条件语句">5.2 条件语句</h2>
 <h3 id="5-2-1-if-语句">5.2.1 if 语句</h3>
 <p><strong>if 语句</strong>: 判断一个指定的条件是否为真, 根据判断结果决定是否执行另一条语句.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 语法形式</span><br><span class="hljs-comment">// 含 else 分支</span><br><span class="hljs-keyword">if</span> (condition)<br>    statement;<br><span class="hljs-keyword">else</span><br>    statement2;<br><span class="hljs-comment">// 不含 else 分支</span><br><span class="hljs-keyword">if</span> (condition)<br>    statement;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// 语法形式
+// 含 else 分支
+if (condition)
+    statement;
+else
+    statement2;
+// 不含 else 分支
+if (condition)
+    statement;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <blockquote>
 <p>[!Tip]</p>
 <p>使用 if, while, for 等语句时, 最好使用花括号. 避免代码混淆不清, 同时可以方便添加代码.</p>
@@ -407,7 +438,21 @@
 <p>if-else 的匹配问题: 对于 <strong>悬垂 else</strong>, C++ 规定 <strong>else 与它最近的尚未匹配的 if 匹配</strong>. 同时, 可以使用花括号来控制执行路径.</p>
 <h3 id="5-2-2-switch-语句">5.2.2 switch 语句</h3>
 <p><strong>switch 语句</strong>: 方便在多个固定选项中做出选择.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">switch</span> (ch) &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;a&#x27;</span>:<br>        statement1;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;b&#x27;</span>:<br>        statement2;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;c&#x27;</span>:<br>        statement3;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;d&#x27;</span>:<br>        statement4;<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">default</span>:<br>        statement5;<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">switch (ch) {
+    case 'a':
+        statement1;
+    case 'b':
+        statement2;
+    case 'c':
+        statement3;
+        break;
+    case 'd':
+        statement4;
+        break;
+    default:
+        statement5;
+        break;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p><strong>case 标签</strong>: case 关键字和它对应的值一起被称为 case 标签.</p>
 <blockquote>
 <p>[!Warning]</p>
@@ -431,27 +476,89 @@
 <h4 id="switch-内部的变量定义">switch 内部的变量定义</h4>
 <p>若匹配到某个特定 case 标签, switch 结构中该 case 标签之前的部分会被忽略. 但是若先前的 “变量的定义” 被忽略了, 后续使用该变量会出现一些问题.</p>
 <p>对于 C++ : <strong>如果在某处一个带有初值的变量位于作用域之外, 在另一处该变量位于作用域之内, 则从前一处跳转到后一处的行为是非法的</strong>. 即 <strong>不允许跨过变量的初始化语句直接跳转到变量作用域内的另一个位置</strong>.</p>
-<div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240306113745854.png" srcset="/img/loading.gif" lazyload alt="image-20240306113745854" /> </div>
+<div style="text-align:center;"> <img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240306113745854.png" srcset="/img/loading.gif" lazyload alt="image-20240306113745854"> </div>
 <p>如果需要为某个 case 分支定义并初始化一个变量, 应该将变量 <strong>定义在块内</strong>, 从而确保后面所有的 case 标签都在变量作用域之外.</p>
 <h2 id="5-4-迭代语句">5.4 迭代语句</h2>
 <h3 id="5-4-1-while-语句">5.4.1 while 语句</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (condition)<br>    statement;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">while (condition)
+    statement;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <h3 id="5-4-2-do-while-语句">5.4.2 do while 语句</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">do</span>&#123;<br>    statement;<br>&#125;<span class="hljs-keyword">while</span> (condition)<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">do{
+    statement;
+}while (condition)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
 <blockquote>
 <p>[!Note]</p>
 <p>while 与 do while 语句仅在执行顺序上有所区别. 另外, while 语句的 condition 中可以定义循环控制变量. 但是 do while 语句中的 condition 中就不适合定义循环控制变量.</p>
 </blockquote>
 <h3 id="5-4-3-for-语句">5.4.3 for 语句</h3>
 <h4 id="传统-for-语句">传统 for 语句</h4>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (init-statement; condition; expression)<br>    statement;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (init-statement; condition; expression)
+    statement;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>其中, init-statement 可以定义多个对象, 但是只能有 <strong>一条</strong> 声明语句, 所以这多个对象的类型需要相同.同时, init-statement, condition, expression 语句可以省略, 但是 <strong>分号</strong> 不可省略.</p>
 <h4 id="for-范围语句">for 范围语句</h4>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (declaration : expression)<br>    statement;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (declaration : expression)
+    statement;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
 <p>express 的值必须是一个 <strong>序列</strong>, 可以是初始值列表, 数组, vector 对象, string 对象等, 这些类型共同特点是都能返回迭代器对象的 begin 和 end 成员.</p>
 <p>declaration 定义一个变量, 序列中的每个元素都能转换成变量的类型. 可以使用 auto 类型说明符. 如果需要改变序列的元素, 需要将变量声明为 <strong>引用类型</strong>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;r : v)&#123;<br>    r*=<span class="hljs-number">2</span>;<br>&#125;<br><span class="hljs-comment">// 等价于</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> beg = v.<span class="hljs-built_in">begin</span>(), end=v.<span class="hljs-built_in">end</span>(); beg!=end; ++beg)&#123;<br>    <span class="hljs-keyword">auto</span> &amp;r = *beg;<br>    r*=<span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (auto &amp;r : v){
+    r*=2;
+}
+// 等价于
+for (auto beg = v.begin(), end=v.end(); beg!=end; ++beg){
+    auto &amp;r = *beg;
+    r*=2;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>由于事先 <strong>预存了 end</strong> 的值, 在循环中增加或删除容器中元素可能会是预存的 end 函数值无效, 所以上述操作是非法的.</p>
+<h2 id="5-5-跳转语句">5.5 跳转语句</h2>
+<h3 id="5-5-1-break-语句">5.5.1 break 语句</h3>
+<p><code>break</code> 语句: 负责终止离它最近的 <code>while</code> , <code>do while</code>, <code>for</code>, <code>switch</code> 语句, 并从这些语句之后的第一条语句开始执行.</p>
+<h3 id="5-5-2-continue-语句">5.5.2 continue 语句</h3>
+<p><code>continue</code> 语句: 终止离他最近的循环的当前迭代, 直接开始下一次迭代.</p>
+<h3 id="5-5-3-goto-语句">5.5.3 goto 语句</h3>
+<p><code>goto</code> 语句:  无条件跳转到同一函数内的另一条语句.</p>
+<p>语法形式是: <code>goto label;</code></p>
+<p>其中 <code>label</code> 是用于表示一条语句的标示符. <strong>带标签语句</strong>是一种特殊的语句, 在它之前有一个标示符和一个冒号:</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">end: return; // 带标签语句, end用来标示 return;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>同 <code>switch</code> 类型, <strong>goto 语句不能将程序的控制权从变量作用域之外转移到变量作用域之内</strong>. 并且, <strong>跳回到变量定义之前系统将销毁变量并重新定义它</strong>.</p>
+<h2 id="5-6-try-语句块和异常处理">5.6 try 语句块和异常处理</h2>
+<ul>
+<li><strong><code>throw</code> 表达式</strong>: 异常检测部分使用 <code>throw</code> 表达式来表示它遇到了无法处理的异常问题. 即 <code>throw</code> <strong>引发</strong> 了异常.</li>
+<li><strong><code>try</code> 语句块</strong>: 异常处理部分使用 <code>try</code> 语句块处理异常. try语句块以关键字 <code>try</code> 开始, 并以一个或多个 <code>catch</code> 子句结束. <code>try</code> 语句块中代码抛出的异常通常会被某个 <code>catch</code> 子句处理. <code>catch</code> 子句也称为 <strong>异常处理代码</strong>.</li>
+<li><strong>异常类</strong>: 用于 <code>throw</code> 表达式与 <code>catch</code> 子句之间传递异常的具体信息.</li>
+</ul>
+<h3 id="5-6-1-throw-表达式">5.6.1 throw 表达式</h3>
+<p><code>throw</code> 表达式: 包括关键词 <code>throw</code> 和一条表达式, 表达式的类型就是异常的类型.</p>
+<h3 id="5-6-2-try-语句块">5.6.2 try 语句块</h3>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">try{
+    program-statements;
+} catch (expression-declaration){
+    
+} catch (expression-declaration){
+    
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><code>catch</code> 子句包含三部分: 关键词 <code>catch</code>, 括号内一个对象的声明 (<strong>异常声明</strong>), 一个语句块.</p>
+<p><code>try</code> 中 <strong>program-statement 部分组成程序的正常逻辑.</strong> 注意 <code>try</code> 语句块内部的变量无法在块外访问, 在 <code>catch</code> 中同样无法访问.</p>
+<h4 id="函数在寻找处理代码的过程中退出">函数在寻找处理代码的过程中退出</h4>
+<p>当 <code>try</code> 语句块中包含函数调用, 被调用的函数中有又同样有 <code>try</code> 语句块, 以此类推可以有多重调用. 此时<strong>寻找处理代码的过程与函数调用链相反</strong>. 若在本函数中未找到匹配的 <code>catch</code> 子句, 则终止该函数, 返回被调用的函数中寻找.</p>
+<p>若最终仍未找到 <code>catch</code> 子句, 则程序转到名为 <strong>terminate</strong> 的标准库函数, 该函数的行为与系统有关, 一般执行该函数会使程序非正常退出. 对于没有 <code>try</code> 语句块的异常处理, 也是同样的处理方式.</p>
+<h3 id="5-6-3-标准异常">5.6.3 标准异常</h3>
+<ul>
+<li><code>exception</code> 头文件定义了最通用的异常类 <code>exception</code>. 它只报告异常的发生而不提供任何额外的信息.</li>
+<li><code>stdexcept</code> 头文件中定义了几种常用的异常类. (如下表)</li>
+<li><code>new</code> 头文件中定义了 <code>bad_alloc</code> 异常类型.</li>
+<li><code>type_info</code> 头文件定义了 <code>bad_cast</code> 异常类型.</li>
+</ul>
+<div style="text-align:center;"><img src="https://fzttypora.oss-cn-beijing.aliyuncs.com/typora_images/image-20240307194612941.png" srcset="/img/loading.gif" lazyload alt="image-20240307194612941"></div>
+<p>标准库异常类只定义了几种运算: 创建或拷贝异常类型的对象, 为异常类型的对象赋值.</p>
+<ul>
+<li>
+<p><code>exception</code>, <code>bad_alloc</code>, <code>bad_cast</code> 只能默认初始化, 不允许为这些对象提供初始值.</p>
+</li>
+<li>
+<p>其他异常类型的行为相反: 应使用 <code>string</code> 对象或 C 风字符串初始化对象, 不允许使用默认初始化方式. 当创建对象时必须要提供初始值, 该初始值说明的异常的信息.</p>
+</li>
+</ul>
+<p>异常类型值定义了 <code>what()</code> 的成员函数, 该函数没有参数, 返回一个指向 C 风格字符串的 <code>cosnt char*</code>, 其内容与异常对象的类型有关.</p>
 
                 
               </div>
@@ -739,6 +846,8 @@
 </script>
 
 
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
@@ -836,6 +945,8 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
